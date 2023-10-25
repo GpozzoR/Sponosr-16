@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    
+<!-- ############## New form res.partner -->
+    <!-- <record id="spo_custom_res_partner_view_form" model="ir.ui.view">
+        <field name="name">spo.custom.res.partner.view.form</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                            <field name="parent_id" invisible="1"/>
+                            <group>
+                                <group>                                    
+                                    <field name="firstname" placeholder="Primer Nombre" required="1" style=" margin-bottom:15px; width:80%%;"/>
+                                    <label for="lastname" string="Apellidos"/>
+                                    <div style=" margin-bottom:15px; width:80%%;">
+                                        <field name="lastname" placeholder="Primer Apellido" required="1"/>
+                                        <field name="lastname2" placeholder="Segundo Apellido" required="1"/>
+                                    </div>
+                                </group>
+                                <group>
+                                    <span>
+                                        <b>Dirección</b>
+                                    </span>
+                                    <div>
+                                        <field name="street" placeholder="Street..." class="o_address_street"/>
+                                        <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                        <field name="city" placeholder="City" class="o_address_city"/>
+                                        <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True, 'no_quick_create': True}" context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}"/>
+                                        <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                        <div name="partner_address_country" class="d-flex justify-content-between">
+                                            <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                                        </div>
+                                    </div>
+                                </group>
+                            </group>             
+                            <notebook>
+                                    <page string="Más Info.">
+                                        <group>
+                                            <group>
+                                                <field name="spo_country_id" style=" margin-bottom:15px; width:80%%;" string="Nacionalidad" required="1"/>
+                                                <label for="l10n_latam_identification_type_id" string="Nro de Documento"/>
+                                                <div style=" margin-bottom:15px; width:83%%;">
+                                                    <field name="l10n_latam_identification_type_id" options="{'no_open': True, 'no_create': True}"  attrs="{'readonly': [('parent_id','!=',False)]}"  required="True"/>
+                                                    <span class="oe_read_only"> - </span>
+                                                    <field name="vat" placeholder="Número"  attrs="{'readonly': [('parent_id','!=',False)]}"  required="1"/>
+                                                </div>
+                                            </group>
+                                            <group>
+                                                <field name="phone" widget="phone" placeholder="Nro telefónico" style=" margin-bottom:15px; width:85%%;"/>
+                                                <field name="email" widget="email" placeholder="xxx@xxx.com" style=" margin-bottom:15px; width:80%%;"/>
+                                            </group>
+                                        </group>
+                                    </page>
+                            </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record> -->
+
+<!-- ########### Herencia Form res.partner -->
+    <record id="spon_res_partner_view_form" model="ir.ui.view">
+        <field name="name">spon.res.partner.view.form</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <div class="alert alert-warning oe_edit_only" role="alert" modifiers="{&quot;invisible&quot;: [[&quot;same_vat_partner_id&quot;, &quot;=&quot;, false]]}">
+                    Ya existe un contacto con el mismo <span><span class="o_vat_label">número de identificación fiscal (NIF)</span></span> (<field name="same_vat_partner_id" modifiers="{&quot;readonly&quot;: true}"/>
+                    <field name="partner_gid" modifiers="{&quot;invisible&quot;: true}"/>
+                    <field name="additional_info" modifiers="{&quot;invisible&quot;: true}"/>), ¿esta seguro de crear uno nuevo?
+                </div>
+                <div class="alert alert-warning oe_edit_only" role="alert" modifiers="{&quot;invisible&quot;: [[&quot;vies_failed_message&quot;, &quot;=&quot;, false]]}">
+                    <field name="vies_failed_message" nolabel="1" modifiers="{&quot;readonly&quot;: true}"/>
+                </div>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" name="schedule_meeting" icon="fa-calendar" context="{'partner_id': active_id, 'partner_name': name}">
+                            <field string="Reuniones" name="meeting_count" widget="statinfo" modifiers="{&quot;readonly&quot;: true}"/>
+                        </button>
+                        <button class="oe_stat_button o_res_partner_tip_opp" type="object" name="action_view_opportunity" icon="fa-star" context="{'default_partner_id': active_id, 'default_type':'opportunity'}">
+                            <field string="Oportunidades" name="opportunity_count" widget="statinfo" modifiers="{&quot;readonly&quot;: true}"/>
+                        </button>
+                        <button class="oe_stat_button" type="object" name="action_view_sale_order" icon="fa-usd">
+                            <field string="Cronogramas" name="sale_order_count" widget="statinfo" modifiers="{&quot;readonly&quot;: true}"/>
+                        </button>
+                        <!-- <button type="object" class="oe_stat_button" name="open_action_followup" icon="fa-list" modifiers="{&quot;invisible&quot;: [[&quot;total_due&quot;, &quot;=&quot;, 0]]}">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value"><field name="total_due" widget="monetary" options="{'currency_field': 'currency_id'}" modifiers="{&quot;readonly&quot;: true}"/></span>
+                                <span class="o_stat_text">Adeudado</span>
+                            </div>
+                        </button> -->
+                        <button type="object" class="oe_stat_button" icon="fa-pencil-square-o" name="action_view_partner_invoices" context="{'default_partner_id': active_id}">
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="currency_id" modifiers="{&quot;invisible&quot;: true, &quot;readonly&quot;: true}" invisible="1"/>
+                                    <field name="total_invoiced" widget="monetary" options="{'currency_field': 'currency_id'}" modifiers="{&quot;readonly&quot;: true}"/>
+                                </span>
+                                <span class="o_stat_text">Facturado</span>
+                            </div>
+                        </button>
+                        <!-- <button type="object" class="oe_stat_button" id="partner_ledger_button" icon="fa-pencil-square-o" name="open_partner_ledger" string="Libro mayor de empresa" context="{'default_partner_id': active_id}">
+                        </button> -->
+                        <button type="action" class="oe_stat_button" icon="fa-credit-card-alt" name="217" context="{'search_default_partner_id': active_id, 'create': False, 'edit': False}" modifiers="{&quot;invisible&quot;: [[&quot;payment_token_count&quot;, &quot;=&quot;, 0]]}">
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="payment_token_count" widget="statinfo" nolabel="1" modifiers="{&quot;readonly&quot;: true}"/>
+                                </span>
+                                <span class="o_stat_text">Métodos de pago guardados</span>
+                            </div>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Archivado" bg_color="bg-danger" modifiers="{&quot;invisible&quot;: [[&quot;active&quot;, &quot;=&quot;, true]]}"/>
+                    <field name="avatar_128" invisible="1" modifiers="{&quot;invisible&quot;: true, &quot;readonly&quot;: true}"/>
+                    <field name="image_1920" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;avatar_128&quot;}" on_change="1"/>
+                    <div class="oe_title mb24">
+                        <field name="is_company" on_change="1" modifiers="{&quot;invisible&quot;: true}" invisible="1"/>
+                        <field name="commercial_partner_id" on_change="1" modifiers="{&quot;invisible&quot;: true, &quot;readonly&quot;: true}" invisible="1"/>
+                        <field name="active" on_change="1" modifiers="{&quot;invisible&quot;: true}" invisible="1"/>
+                        <field name="company_id" on_change="1" modifiers="{&quot;invisible&quot;: true}" can_create="true" can_write="true" invisible="1"/>
+                        <field name="country_code" modifiers="{&quot;invisible&quot;: true, &quot;readonly&quot;: true}" invisible="1"/>
+                        <field name="company_type" widget="radio" options="{'horizontal': true}" on_change="1" invisible="1"/>
+                        <h1>
+                            <field id="individual" class="text-break" name="name" default_focus="1" placeholder="p. ej. Brandom Freeman" widget="field_partner_autocomplete" on_change="1" modifiers="{&quot;invisible&quot;: [[&quot;is_company&quot;, &quot;=&quot;, true]], &quot;required&quot;: [[&quot;type&quot;, &quot;=&quot;, &quot;contact&quot;]]}"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group modifiers="{&quot;invisible&quot;: [[&quot;company_type&quot;, &quot;=&quot;, &quot;company&quot;]]}">
+                            <field name="spo_beneficent_ids" widget="many2many_tags" modifiers="{&quot;invisible&quot;: [[&quot;company_type&quot;, &quot;=&quot;, &quot;company&quot;]]}" can_create="true" can_write="true"/>
+                            <field name="category_id" string="Etiquetas" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" placeholder="e.g. &quot;B2B&quot;, &quot;VIP&quot;, &quot;Consulting&quot;, ..." can_create="true" can_write="true"/>
+                            <field name="mobile" on_change="1"/>
+                            <field name="spo_work_mobile" widget="phone"/>
+                        </group>
+                        <group modifiers="{&quot;invisible&quot;: [[&quot;company_type&quot;, &quot;=&quot;, &quot;company&quot;]]}">
+                            <field name="phone" on_change="1"/>
+                            <field name="email" on_change="1"/>
+                            <field name="spo_work_email" widget="email"/>
+                            <field name="spo_uni_email"/>
+                        </group>
+                        <separator/>
+                        <group>
+                            <field name="spo_fiador_id" domain="[('spo_beneficent_ids','=',2)]" context="{'default_spo_beneficent_ids':[2]}" options="{'no_quick_create':True}" modifiers="{&quot;invisible&quot;: [[&quot;company_type&quot;, &quot;=&quot;, &quot;company&quot;]]}" can_create="true" can_write="true"/>
+                        </group>
+                        <group>
+                            <field name="spo_representative_id" style="margin-bottom:20px" context="{'default_spo_beneficent_ids':[3]}" domain="[('spo_beneficent_ids','=',3)]" options="{'no_quick_create':True}" modifiers="{&quot;invisible&quot;: [[&quot;company_type&quot;, &quot;=&quot;, &quot;company&quot;]], &quot;readonly&quot;: [&quot;|&quot;, [&quot;spo_age&quot;, &quot;&gt;=&quot;, 18], [&quot;spo_age&quot;, &quot;=&quot;, 0]]}" can_create="true" can_write="true"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="info_contact" string="Info Contacto" attrs="{'invisible': [('company_type', '=', 'company')]}">
+                            <group>
+                                <group>
+                                    <label for="l10n_latam_identification_type_id" string="Número de Identificación"/>
+                                    <div>
+                                        <field name="l10n_latam_identification_type_id" options="{'no_open': True, 'no_create': True}" placeholder="Tipo" class="oe_inline" domain="country_id and ['|', ('country_id', '=', False), ('country_id', '=', country_id)] or []" modifiers="{&quot;readonly&quot;: [[&quot;parent_id&quot;, &quot;!=&quot;, false]], &quot;required&quot;: true}" can_create="false" can_write="true"/>
+                                        <span class="oe_read_only"> - </span>
+                                        <field name="vat" placeholder="Número" class="oe_inline" string="RUC" on_change="1" modifiers="{&quot;readonly&quot;: [[&quot;parent_id&quot;, &quot;!=&quot;, false]]}"/>
+                                    </div>
+                                    <field name="spo_RUC" placeholder="RUC"/>
+                                    <label for="spo_birthdate_date" string="Fecha de Nacimiento" modifiers="{&quot;invisible&quot;: [[&quot;company_type&quot;, &quot;=&quot;, &quot;company&quot;]]}"/>                    
+                                    <div class="o_row" modifiers="{&quot;invisible&quot;: [[&quot;company_type&quot;, &quot;=&quot;, &quot;company&quot;]]}">
+                                            <field name="spo_birthdate_date" placeholder="Fecha de Nacimiento" on_change="1"/>
+                                            <span>Años</span>
+                                            <field name="spo_age" modifiers="{&quot;readonly&quot;: true}"/>
+                                    </div>
+                                    <label for="spo_street_born" string="Lugar de Nacimiento" modifiers="{&quot;invisible&quot;: [[&quot;company_type&quot;, &quot;=&quot;, &quot;company&quot;]]}"/>
+                                    <div modifiers="{&quot;invisible&quot;: [[&quot;company_type&quot;, &quot;=&quot;, &quot;company&quot;]]}">
+                                        <field name="spo_street_born" placeholder="Lugar de Nacimiento"/>
+                                    </div>
+                                    <field name="spo_sex_type" modifiers="{&quot;invisible&quot;: [[&quot;company_type&quot;, &quot;=&quot;, &quot;company&quot;]]}"/>
+                                    <field name="spo_country_id" modifiers="{&quot;invisible&quot;: [[&quot;is_company&quot;, &quot;=&quot;, true]]}" can_create="true" can_write="true"/>
+                                </group>
+                                <group>
+                                    <span>Dirección</span>
+                                    <div class="o_address_format">
+                                        <field name="country_enforce_cities" modifiers="{&quot;invisible&quot;: true, &quot;readonly&quot;: true}"/>
+                                        <field name="parent_id" on_change="1" modifiers="{&quot;invisible&quot;: true}" can_create="true" can_write="true"/>
+                                        <field name="type" on_change="1" modifiers="{&quot;invisible&quot;: true}"/>
+                                        <field name="street" placeholder="Street..." class="o_address_street" on_change="1" modifiers="{&quot;readonly&quot;: [[&quot;type&quot;, &quot;=&quot;, &quot;contact&quot;], [&quot;parent_id&quot;, &quot;!=&quot;, false]]}"/>
+                                        <field name="street2" placeholder="Street 2..." class="o_address_street" modifiers="{&quot;readonly&quot;: [[&quot;type&quot;, &quot;=&quot;, &quot;contact&quot;], [&quot;parent_id&quot;, &quot;!=&quot;, false]]}"/>
+                                        <field name="l10n_pe_district" placeholder="Distrito..." class="o_address_street" on_change="1" modifiers="{&quot;readonly&quot;: [[&quot;type&quot;, &quot;=&quot;, &quot;contact&quot;], [&quot;parent_id&quot;, &quot;!=&quot;, false]]}" can_create="true" can_write="true"/>
+                                        <field name="city_id" placeholder="City" class="o_address_city" domain="[('country_id', '=', country_id)]" context="{'default_country_id': country_id, 'default_state_id': state_id, 'default_zipcode': zip}" on_change="1" modifiers="{&quot;invisible&quot;: [[&quot;country_enforce_cities&quot;, &quot;=&quot;, false]], &quot;readonly&quot;: [[&quot;type&quot;, &quot;=&quot;, &quot;contact&quot;], [&quot;parent_id&quot;, &quot;!=&quot;, false]]}" can_create="true" can_write="true"/>
+                                        <field name="city" placeholder="City" class="o_address_city" on_change="1" modifiers="{&quot;invisible&quot;: [[&quot;country_enforce_cities&quot;, &quot;=&quot;, true], &quot;|&quot;, [&quot;city_id&quot;, &quot;!=&quot;, false], [&quot;city&quot;, &quot;in&quot;, [&quot;&quot;, false]]], &quot;readonly&quot;: [[&quot;type&quot;, &quot;=&quot;, &quot;contact&quot;], [&quot;parent_id&quot;, &quot;!=&quot;, false]]}"/>
+                                        <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True, 'no_quick_create': True}" context="{'default_country_id': country_id}" on_change="1" modifiers="{&quot;readonly&quot;: [[&quot;type&quot;, &quot;=&quot;, &quot;contact&quot;], [&quot;parent_id&quot;, &quot;!=&quot;, false]]}" can_create="true" can_write="true"/>
+                                        <field name="zip" placeholder="ZIP" class="o_address_zip" on_change="1" modifiers="{&quot;readonly&quot;: [[&quot;type&quot;, &quot;=&quot;, &quot;contact&quot;], [&quot;parent_id&quot;, &quot;!=&quot;, false]]}"/>
+                                        <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" on_change="1" modifiers="{&quot;readonly&quot;: [[&quot;type&quot;, &quot;=&quot;, &quot;contact&quot;], [&quot;parent_id&quot;, &quot;!=&quot;, false]]}" can_create="true" can_write="true"/>
+                                    </div>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Info. Estudios" attrs="{'invisible': [('is_company', '=', True)]}">
+                            <group>
+                                <group>
+                                    <field name="spo_university_id"  placeholder="Universidad"  class="border-bottom"  options="{'no_quick_create':True}"/>
+                                    <field name="spo_academic_program_uni_id"  class="border-bottom" domain="[('spo_university_id','=',spo_university_id)]" attrs="{'readonly':[('spo_university_id','=',False)]}"/>
+                                    <field name="spo_career_mixed_id" class="border-bottom" domain="[('spo_academic_program_uni_id','=',spo_academic_program_uni_id),('spo_university_id','=',spo_university_id)]" attrs="{'readonly':['|',('spo_academic_program_uni_id','=',False),('spo_university_id','=',False)]}"/>
+                                    <field name="spo_modality_career" class="border-bottom"/>
+                                </group>
+                                <group>
+                                    <label string="Promedio Ponderado Acumulado(PPA)" for="spo_average_saved"/>
+                                    <div class="o_row">
+                                        <field name="spo_average_saved" class="border-bottom" string="PPA(Promedio Ponderado Acumulado)"/>
+                                        <field name="spo_signal_requisist_PPA" decoration-danger="spo_signal_requisist_PPA == 'No cumple'"  decoration-success="spo_signal_requisist_PPA == 'Cumple'" readonly="1"/>
+                                        <field name="spo_signal_requisist_PPA_excep" decoration-danger="spo_signal_requisist_PPA_excep == 'No cumple Excep'"  decoration-success="spo_signal_requisist_PPA_excep == 'Cumple Excep'" readonly="1"/>
+                                    </div>
+                                    <label string="Créditos Acumulados(CA)" for="spo_credits_saved"/>
+                                    <div class="o_row">
+                                        <field name="spo_credits_saved" class="border-bottom" string="CA (Créditos Acumulados)"/>
+                                        <field name="spo_signal_requisist_CA" decoration-danger="spo_signal_requisist_CA == 'No cumple'"  decoration-success="spo_signal_requisist_CA == 'Cumple'" readonly="1"/>
+                                        <field name="spo_signal_requisist_CA_excep" decoration-danger="spo_signal_requisist_CA_excep == 'No cumple Excep'"  decoration-success="spo_signal_requisist_CA_excep == 'Cumple Excep'" readonly="1"/>
+                                    </div>
+                                    <field name="spo_requisit" class="border-bottom" string="Cumple Requisitos Mínimos (PPA / CA)"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+<!-- ########### Herencia Kanban res.partner -->
+    <record id="spo_res_partner_inherit_view_kanban" model="ir.ui.view">
+        <field name="name">spo.res.partner.inherit.view.kanban</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//strong[@class='o_kanban_record_title oe_partner_heading']" position="after">
+                <div>
+                    <field name="spo_display_age" attrs="{'invisible': [('is_company', '=', True)]}"/>
+                </div>
+                <div>
+                    <field name="spo_display_doc"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+<!-- #################Herencia Search  res.partner -->
+    <record id="spo_custom_res_partner_filter_view_search" model="ir.ui.view">
+        <field name="name">spo.custom.res.partner.filter.view.search</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="after">
+                <separator/>
+                <filter string="Beneficiarios" name="bene" domain="[('spo_beneficent_ids','=',1)]"/>
+                <filter string="Fiadores" name="fia" domain="[('spo_beneficent_ids','=',2)]"/>
+                <filter string="Apoderados" name="repre" domain="[('spo_beneficent_ids','=',3)]"/>
+                <separator/>
+                <group>
+                    <filter name="program" string="Programas Académicos" context="{'group_by': 'spo_academic_program_id'}"/>
+                    <filter name="university" string="Universidades" context="{'group_by': 'spo_university_id'}"/>
+                    <filter name="careers" string="Carreras" context="{'group_by': 'spo_career_id'}"/>
+                    <filter name="age" string="Edades" context="{'group_by': 'spo_age'}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+    <record id="spon_res_partner_action" model="ir.actions.act_window">
+        <field name="name">Contactos</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'kanban', 'view_id': ref('base.res_partner_kanban_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('spon_res_partner_view_form')})]"/>
+        <field name="view_id" ref="base.res_partner_kanban_view"/>
+        <field name="search_view_id" ref="base.view_res_partner_filter"/>
+        <field name="context">{'default_company_type':'individual'}</field>
+    </record>    
+</odoo>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <record id="spo_create_payment_cuota_ir_cron" forcecreate="True" model="ir.cron">
+            <field name="name">Crear Pago de Cuota</field>
+            <field name="model_id" ref="model_sale_order_line"/>
+            <field name="type">ir.action.server</field>
+            <field name="state">code</field>
+            <field name="code">model.create_payment_cuota_and_send_email()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+        </record>
+        <!-- <record id="spo_change_state_desembolso_ir_cron" forcecreate="True" model="ir.cron">
+            <field name="name">Cambio de Estado de Desembolso</field>
+            <field name="model_id" ref="model_sale_order_line_desembolso"/>
+            <field name="type">ir.action.server</field>
+            <field name="state">code</field>
+            <field name="code">model.change_state_desembolso()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+        </record> -->
+    </data>
+</odoo>

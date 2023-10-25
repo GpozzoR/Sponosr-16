@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <data>
+
+            <record id="spo_sale_order_view_form_inherit" model="ir.ui.view">
+                <field name="name">spo.sale.order.view.form.inherit</field>
+                <field name="model">sale.order</field>
+                <field name="inherit_id" ref="sale.view_order_form"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//group[@name='partner_details']" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                    <xpath expr="//group[@name='order_details']" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                    <xpath expr="//group" position="inside">
+                        <group>
+                            <field name="partner_id" widget="res_partner_many2one" context="{'res_partner_search_mode': 'customer', 'show_address': 1, 'show_vat': True,'show_l10n_latam_identification_type_id':True, 'form_view_ref':'sponsor_educative_credit.spon_res_partner_view_form'}" options="{&quot;always_reload&quot;: True}" on_change="1" modifiers="{&quot;readonly&quot;: [[&quot;state&quot;, &quot;in&quot;, [&quot;cancel&quot;, &quot;done&quot;, &quot;sale&quot;]]], &quot;required&quot;: true}" can_create="true" can_write="true"/>
+                            <field name="validity_date" modifiers="{&quot;invisible&quot;: [[&quot;state&quot;, &quot;in&quot;, [&quot;sale&quot;, &quot;done&quot;]]], &quot;readonly&quot;: [[&quot;state&quot;, &quot;in&quot;, [&quot;cancel&quot;, &quot;done&quot;, &quot;sale&quot;]]]}"/>
+                            <field name="user_id" widget="many2one_avatar_user" on_change="1" can_create="true" can_write="true"/>
+                        </group>
+                        <group>
+                            <label string="Estado de Contrato" for="beginnig_date_contract"/>
+                            <div class="o_row">
+                                <field class="border-bottom" name="contract_state" widget="selection" domain="[('type_state','=',2)]"/>
+                                <field class="border-bottom" name="beginnig_date_contract" placeholder="dd/mm/aaaa"/>
+                            </div>
+                            <label string="Envío del CCE" for="sending_date_CCE"/>
+                            <div class="o_row">
+                                <field class="border-bottom" name="sending_state_CCE" widget="selection" domain="[('type_state','=',3)]"/>
+                                <field class="border-bottom" name="sending_date_CCE" placeholder="dd/mm/aaaa"/>
+                            </div>
+                            <field class="border-bottom" name="signature_state_CEE" widget="selection" domain="[('type_state','=',4)]"/>
+                            <label string="Resultado Final de la Evaluación" for="final_result_date"/>
+                            <div class="o_row">
+                                <field class="border-bottom" name="final_result_evaluation" widget="selection" domain="[('type_state','=',1)]" can_create="true" can_write="true"/>
+                                <field class="border-bottom" name="final_result_date" placeholder="dd/mm/aaaa"/>
+                            </div>
+                            <field class="border-bottom" name="start_date" string="Inicio de Sponsor" placeholder="dd/mm/aaaa"/>
+                        </group>
+                    </xpath>
+                    <xpath expr="//page[@name='order_lines']" position="attributes">
+                        <attribute name="string">Línea de Cuotas</attribute>
+                    </xpath>
+                    <xpath expr="//page[@name='order_lines']" position="after">
+                        <page string="Desembolsos" name="line_desembolsos">
+                            <field name="spo_doble_career" invisible="1"/>
+                            <field name="spo_academic_program_id" invisible="1"/>
+                            <group>
+                                <div class="w-100 p-3">
+                                    <button string="Calcular" name="calculate_desembolso" type="object" class="btn btn-outline-primary"/>
+                                </div>
+                                <field name="groups" invisible="1"/>
+                                <field name="desembolso_ids" context="{'default_spo_academic_program_id': spo_academic_program_id, 'default_spo_doble_career':spo_doble_career}" attrs="{'readonly': [('groups', '=','False')]}">
+                                    <tree>
+                                        <field name="spo_doble_career" invisible="1"/>
+                                        <field name="spo_nro_desem"/>
+                                        <field name="Nro_credits" string="Nro. Créditos"/>
+                                        <field name="spo_display_promo" string="Promo"/>
+                                        <field name="spo_type_currency"/>
+                                        <field name="base_amount"/>
+                                        <field name="matri"/>
+                                        <field name="pension"/>
+                                        <field name="deuda"/>
+                                        <field name="total_desembolso" string="Total"/>  
+                                        <field name="spo_state_desembolso" widget="badge" decoration-danger="spo_state_desembolso == 'late'"  decoration-success="spo_state_desembolso == 'paid'"/> 
+                                        <field name="spo_date_give" string="Fecha"/>
+                                    </tree>
+                                    <form>
+                                        <widget name="web_ribbon" title="Pagado" attrs="{'invisible': [('spo_state_desembolso', '!=', 'paid')]}"/>
+                                        <div name="button_box" class="oe_button_box">
+                                            <button  name="open_diario" type="object" class="oe_stat_button">
+                                                <div class="o_stat_info">
+                                                    <!-- <field name="spo_payments" class="o_stat_value" readonly="1"/> -->
+                                                    <span class="o_stat_text">Asiento de Diario</span>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <group>
+                                            <field name="spo_doble_career" invisible="1"/>
+                                            <group>
+                                                <field name="spo_nro_desem" class="border-bottom"/>
+                                                <field name="Nro_credits" class="border-bottom"/>
+                                                <field name="sponsor_promotion" class="border-bottom"/>
+                                                <field name="spo_date_give" class="border-bottom"/>
+                                                <field name="spo_type_currency" class="border-bottom" attrs="{'readonly':[('spo_doble_career','=',False)]}"/>
+                                                <field name="spo_state_desembolso" class="border-bottom"/> 
+                                                <field name="spo_academic_program_id" invisible="1"/>
+                                            </group>
+                                            <group>
+                                                <field class="border-bottom" name="spo_base_amount_pen" attrs="{'invisible':['|',('spo_type_currency','=','usd'),('spo_type_currency','=',False)]}"/>
+                                                <field class="border-bottom" name="spo_base_amount_usd" attrs="{'invisible':['|',('spo_type_currency','=','pen'),('spo_type_currency','=',False)]}"/>
+                                                <field class="border-bottom" name="cuota_matricula_soles" attrs="{'invisible':['|',('spo_type_currency','=','usd'),('spo_type_currency','=',False)]}"/>
+                                                <field class="border-bottom" name="cuota_matricula_usd" attrs="{'invisible':['|',('spo_type_currency','=','pen'),('spo_type_currency','=',False)]}"/>
+                                                <field class="border-bottom" name="cuota_pension_soles" attrs="{'invisible':['|',('spo_type_currency','=','usd'),('spo_type_currency','=',False)]}"/>
+                                                <field class="border-bottom" name="cuota_pension_usd" attrs="{'invisible':['|',('spo_type_currency','=','pen'),('spo_type_currency','=',False)]}"/>
+                                                <field class="border-bottom" name="deuda_soles" attrs="{'invisible':['|',('spo_type_currency','=','usd'),('spo_type_currency','=',False)]}"/>
+                                                <field class="border-bottom" name="deuda_usd" attrs="{'invisible':['|',('spo_type_currency','=','pen'),('spo_type_currency','=',False)]}"/>
+                                                <field class="border-bottom" name="total_desembolso" />
+                                            </group>
+                                        </group>
+                                        <notebook>
+                                            <page string="Ejecución">
+                                                <group>
+                                                    <group>
+                                                        <label string="Importe" for="spo_import"/>
+                                                        <div class="o_row">
+                                                            <field name="spo_import" class="border-bottom"/>
+                                                            <field name="spo_currency" class="border-bottom"/>
+                                                        </div>
+                                                        <field name="spo_paid_date" class="border-bottom" placeholder="dd/mm/aaaa"/>
+                                                        <field name="spo_memo" class="border-bottom"/>
+                                                    </group>
+                                                    <group>
+                                                        <field name="spo_diary" class="border-bottom"/>
+                                                        <field name="spo_bancary_account" class="border-bottom"/>
+                                                    </group>
+                                                </group>
+                                            </page>
+                                        </notebook>
+                                    </form>
+                                </field>
+                                <group>
+                                </group>
+                                <group>
+                                    <group>
+                                    </group>
+                                    <group>
+                                        <b>Préstamo:</b>
+                                        <h5>
+                                            <field name="total_prestamo" widget="monetary" nolabel="1" colspan="2" modifiers="{&quot;readonly&quot;: true}"/>
+                                        </h5>
+                                        <b>Entregado:</b>
+                                        <h5>
+                                            <field name="total_entregado" widget="monetary" nolabel="1" colspan="2" modifiers="{&quot;readonly&quot;: true}"/>
+                                        </h5>
+                                        <b>Por Entregar:</b>
+                                        <h5>
+                                            <field name="total_per_entregado" widget="monetary" nolabel="1" colspan="2" modifiers="{&quot;readonly&quot;: true}"/>
+                                        </h5>
+                                    </group>
+                                </group>
+                            </group>
+                        </page>
+                    </xpath>
+                    <xpath expr="//field[@name='order_line']" position="before">
+                        <group>
+                            <group>
+                                <div class="o_row">
+                                    <button string="Calcular" name="load_cuotas" type="object" class="btn btn-outline-primary"/>
+                                    <button string="Eliminar" name="delete_cuotas" type="object" class="btn btn-outline-primary"/>
+                                </div>
+                            </group>
+                        </group>
+                    </xpath>
+                    <xpath expr="//field[@name='tax_totals']" position="before">
+                        <b>Adeudado:</b>
+                        <h5>
+                            <field name="total_late" readonly="1" widget="monetary" nolabel="1" colspan="2"/>
+                        </h5>
+                        <b>Interéses:</b>
+                        <h5>
+                            <field name="total_interes" readonly="1" widget="monetary" nolabel="1" colspan="2"/>
+                        </h5>
+                        <b>Moras:</b>
+                        <h5>
+                            <field name="total_moras" readonly="1" widget="monetary" nolabel="1" colspan="2"/>
+                        </h5>
+                        <b>Otros Gastos:</b>
+                        <h5>
+                            <field name="total_other" readonly="1" widget="monetary" nolabel="1" colspan="2"/>
+                        </h5>
+                        <b>Pagado:</b>
+                        <h5>
+                            <field name="total_paid" readonly="1" widget="monetary" nolabel="1" colspan="2"/>
+                        </h5>
+                    </xpath>
+                    <xpath expr="//field[@name='order_line']/tree" position="attributes">
+                        <attribute name="editable"/>
+                    </xpath>
+                    <xpath expr="//field[@name='order_line']/tree/field[@name='product_template_id']" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom_qty']" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='order_line']/tree/field[@name='tax_id']" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='order_line']/tree/field[@name='price_subtotal']" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="attributes">
+                        <attribute name="string">Cuota</attribute>
+                    </xpath>
+                    <xpath expr="//label[@for='pricelist_id']" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='pricelist_id']" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                        <attribute name="modifiers">{&quot;readonly&quot;: [[&quot;state&quot;, &quot;in&quot;, [&quot;sale&quot;, &quot;cancel&quot;, &quot;done&quot;]]]}</attribute>
+                    </xpath>
+                    <xpath expr="//div[@groups='product.group_product_pricelist']" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='payment_term_id']" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="before">
+                        <field name="spo_nro_cuota_ident"/>
+                        <field name="spo_final_date"/>
+                    </xpath>
+                    <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="after">
+                        <field name="spo_desembolso"/>
+                        <field name="spo_capital"/>
+                        <field name="spo_amortizacion"/>
+                        <field name="spo_interes"/>
+                        <field name="spo_desgravamen"/>
+                        <field name="spo_costo_gestion"/>
+                        <field name="cuota_total" string="Total"/>
+                        <field name="payment_state" widget="badge" decoration-danger="payment_state == 'late'"  decoration-success="payment_state == 'paid'" />
+                    </xpath>
+                    <xpath expr="//field[@name='order_line']/form" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='tax_totals']" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='order_line']" position="attributes">
+                        <attribute name="attrs">{'readonly':[('groups', '=','False')]}</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='order_line']/form" position="after">
+                        <form string="Líneas De Cuota">
+                            <widget name="web_ribbon" title="Pagado" attrs="{'invisible': [('payment_state', '!=', 'paid')]}"/>
+                            <div name="button_box" class="oe_button_box">
+                                <button  name="open_payments" type="object" class="oe_stat_button" icon="fa-solid fa-money-bill">
+                                    <div class="o_stat_info">
+                                        <!-- <field name="spo_payments" class="o_stat_value" readonly="1"/> -->
+                                        <span class="o_stat_text">Recibo</span>
+                                    </div>
+                                </button>
+                                <button  name="open_invoices" type="object" class="oe_stat_button" icon="fa-solid fa-receipt">
+                                    <div class="o_stat_info">
+                                        <!-- <field name="spo_payments" class="o_stat_value" readonly="1"/> -->
+                                        <span class="o_stat_text">Factura</span>
+                                    </div>
+                                </button>
+                                <button  name="open_diario" type="object" class="oe_stat_button" icon="fa-solid fa-receipt">
+                                    <div class="o_stat_info">
+                                        <!-- <field name="spo_payments" class="o_stat_value" readonly="1"/> -->
+                                        <span class="o_stat_text">Asiento de Diario</span>
+                                    </div>
+                                </button>
+                            </div>
+                            <group>
+                                <group>
+                                    <label string="Cuota" for="spo_nro_cuota_ident"/>
+                                    <div class="o_row">
+                                        <field name="spo_nro_cuota_ident" class="border-bottom" attrs="{'readonly':[('payment_state','=','paid')]}"/>
+                                        <field name="spo_type_cuota" string="Tipo de Cuota" class="border-bottom" attrs="{'readonly':[('payment_state','=','paid')]}"/>
+                                    </div>
+                                    <field name="spo_emision_date" string="Fecha de Emision" class="border-bottom" attrs="{'readonly':[('payment_state','=','paid')]}"/>
+                                    <field name="spo_final_date" string="Fecha de Vencimiento" class="border-bottom" attrs="{'readonly':[('payment_state','=','paid')]}"/>
+                                    <field name="spo_desembolso" string="Desembolso" class="border-bottom" attrs="{'readonly':[('payment_state','=','paid')]}"/>
+                                    <field name="spo_capital" string="Capital" class="border-bottom" attrs="{'readonly':[('payment_state','=','paid')]}"/>
+                                    <!-- <field name="name" string="Cuota" class="border-bottom" attrs="{'readonly':[('payment_state','=','paid')]}"/> -->
+                                </group>
+                                <group>
+                                    <field name="spo_amortizacion"  string="Amortizacion de Capital" class="border-bottom" attrs="{'readonly':[('payment_state','=','paid')]}"/>
+                                    <field name="spo_interes" string="Interes" class="border-bottom" attrs="{'readonly':[('payment_state','=','paid')]}"/>
+                                    <field name="spo_desgravamen" string="Desgravamen" class="border-bottom" attrs="{'readonly':[('payment_state','=','paid')]}"/>
+                                    <field name="spo_costo_gestion" string="Costo de Gestíon" class="border-bottom" attrs="{'readonly':[('payment_state','=','paid')]}"/>
+                                    <field name="cuota_total" string="Cuota Total" class="border-bottom" attrs="{'readonly':[('payment_state','=','paid')]}"/>
+                                </group>
+                                <group>
+                                    <field name="payment_state"/>
+                                </group>
+                            </group>
+                            <notebook>
+                                <page string="Pagos">
+                                    <group>
+                                        <group>
+                                            <label string="Importe" for="spo_import"/>
+                                            <div class="o_row">
+                                                <field name="spo_import" class="border-bottom"/>
+                                                <field name="spo_currency" class="border-bottom"/>
+                                            </div>
+                                            <field name="spo_paid_date" class="border-bottom" placeholder="dd/mm/aaaa"/>
+                                            <field name="spo_memo" class="border-bottom"/>
+                                        </group>
+                                        <group>
+                                            <field name="spo_diary" class="border-bottom"/>
+                                            <field name="spo_bancary_account" class="border-bottom"/>
+                                            <field name="spo_cuota_related" class="border-bottom"/>
+                                        </group>
+                                    </group>
+                                </page>
+                            </notebook>
+                        </form>
+                    </xpath>
+                    <!-- <xpath expr="//header" position="inside">
+                        <button name="wizard_cuota_report" type="object" string="Reporte de Cuota"/>
+                    </xpath> -->
+                    <xpath expr="//notebook" position="inside">
+                        <page name="parameters" string="Parámetros">
+                            <group name="parameters_group">
+                                <group string="Cronograma">
+                                    <group>
+                                        <field name="spo_cuota_student" class="border-bottom"/>
+                                        <field name="spo_cuota_graduate" class="border-bottom"/>
+                                        <separator/>
+                                        <field name="spo_credits_career" class="border-bottom"/>
+                                        <field name="spo_credits_studied" class="border-bottom"/>
+                                        <field name="spo_credits_miss" class="border-bottom"/>
+                                    </group>
+                                    <group>
+                                        <field name="spo_parameter_PPA" readonly="1" string="Parámetro PPA" class="border-bottom"/>
+                                        <field name="spo_parameter_PPA_exepcion" readonly="1" string="Parámetro PPA Exepción" class="border-bottom"/>
+                                        <field name="spo_parameter_CA" readonly="1" string="Parámetro CA" class="border-bottom"/>
+                                        <field name="spo_parameter_CA_exepcion" readonly="1" string="Parámetro CA Exepción" class="border-bottom"/>
+                                    </group>
+                                </group>
+                                <group string="Parámetros de Calculo">
+                                    <field name="spo_rate_interes_anual" readonly="1" string="% Interes Anual" class="border-bottom"/>
+                                    <field name="spo_cost_gestion" readonly="1" string="Costo Gestíon" class="border-bottom"/>
+                                    <field name="spo_rate_seguro_desgravamen" readonly="1" string="% Seguro Desgravamen" class="border-bottom"/>
+                                </group>
+                            </group>
+                        </page>
+                    </xpath>
+                </field>
+            </record>
+
+            <!-- <record id="sale_order_add_states_view_quotation_tree" model="ir.ui.view">
+                <field name="name">sale.order.add.states.view.quotation.tree</field>
+                <field name="model">sale.order</field>
+                <field name="inherit_id" ref="sale.view_quotation_tree"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//field[@name='state']" position="after">
+                        <field name="spo_state_desembolso" widget="badge" decoration-danger="spo_state_desembolso == 'late'"  decoration-success="spo_state_desembolso == 'not_late'"/>
+                        <field name="spo_state_cronograma" widget="badge" decoration-danger="spo_state_cronograma == 'late'"  decoration-success="spo_state_cronograma == 'not_late'"/>
+                    </xpath>
+                </field>
+            </record> -->
+
+            <record id="sale_order_spon_options" model="ir.ui.view">
+                <field name="name">sale.order.spon.options.inherit.view.form</field>
+                <field name="model">sale.order</field>
+                <field name="inherit_id" ref="sale_management.sale_order_form_quote"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//page[@name='optional_products']" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                </field>
+            </record>
+
+            <record id="spo_contract_action" model="ir.actions.act_window">
+                <field name="name">Cronograma / Corrida</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">sale.order</field>
+                <field name="view_mode">tree,form</field>
+                <field name="view_ids" eval="[(5, 0, 0),
+                        (0, 0, {'view_mode': 'tree', 'view_id': ref('sale.view_quotation_tree_with_onboarding')}),
+                        (0, 0, {'view_mode': 'form', 'view_id': ref('sale.view_order_form')})]"/>
+                <field name="view_id" ref="sale.view_quotation_tree_with_onboarding"/>
+            </record>
+
+        </data>
+</odoo>

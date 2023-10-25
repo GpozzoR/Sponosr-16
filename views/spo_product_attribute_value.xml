@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+        <record id="spo_product_attribute_add_miss_semester_view_form_inherit" model="ir.ui.view">
+            <field name="name">spo.product.attribute.add.miss.semester.view.form.inherit</field>
+            <field name="model">product.attribute</field>
+            <field name="inherit_id" ref="product.product_attribute_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='html_color']" position="after">
+                    <!-- Add your fields here -->
+                    <field name="spo_miss_semester" widget="many2many_tags"/>
+                </xpath>
+            </field>
+        </record>
+    
+    </data>
+    
+
+</odoo>

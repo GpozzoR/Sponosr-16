@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        
+        <record id="report_cuota_parperformat" model="report.paperformat">
+            <field name="name">Papel de Recibo de Cuota</field>
+            <field name="format">B6</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">40.00</field>
+            <field name="margin_bottom">3.00</field>
+            <field name="margin_left">7.00</field>
+            <field name="margin_right">7.00</field>
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <!-- Accion cuotas Report -->
+        <record id="report_cuota_wizard" model="ir.actions.report">
+            <field name="name">Reporte de Cuota Wizard</field>
+            <field name="model">spo.report.cuota</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">sponsor_educative_credit.report_cuota_wizard_template</field>
+            <field name="report_file">sponsor_educative_credit.report_cuota_wizard_template</field>
+            <field name="binding_model_id" ref="model_spo_report_cuota"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="sponsor_educative_credit.report_cuota_parperformat"/>
+        </record>
+
+        <record id="report_cuota_mail" model="ir.actions.report">
+            <field name="name">Reporte de Cuota para Mail</field>
+            <field name="model">sale.order.line</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">sponsor_educative_credit.report_cuota_for_mail_template</field>
+            <field name="report_file">sponsor_educative_credit.report_cuota_for_mail_template</field>
+            <field name="binding_model_id" ref="model_sale_order_line"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="sponsor_educative_credit.report_cuota_parperformat"/>
+        </record>
+
+        <!-- Template cuotas report-->
+        <template id="report_cuota_wizard_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="cuota">
+                    <div class="page">
+                        <style type="text/css">
+                            *{
+                            font-family: sans-serif ;
+                        }
+                        .header{
+                            width:100%;
+                        }
+                        table {
+                            border-collapse: collapse;
+                            width: 100%;
+                            border-radius: 20px;
+                        }
+                        th, td {
+                            <!-- border: 1px solid #232528; -->
+                            padding: 10px;
+                            text-align: center;
+                        }
+                        th {
+                            font-weight: lighter;
+                            background-color: #CAC4CE;
+                            border-bottom: 1px solid #232528;
+
+                        }
+                        td{
+                            border-bottom: 0.5px solid #D7D9D7;
+                        }
+
+                        .head{
+                            width:100%;
+                            display: flex;
+                            flex-direction:row;
+                            flex-wrap:wrap;
+                            justify-content:space-between;
+                            margin-bottom:20px;
+                        }   
+                        .child1{
+
+                            float: left;
+                            width:25%;
+                        }
+                        .child2{
+                            margin-top:20px;
+                            float: right;
+                            padding:10px;
+                            <!-- width:25%; -->
+                            display:inline-block;
+                        }
+                        .bold{
+                            font-weight: bold;
+                        }
+                        .block{
+                            display:block;
+                        }
+                        .border{
+                            border-top: solid 1px #D7D9D7;
+                            padding:10px;
+                        }
+                        p{
+                            font-weight: lighter;
+                            margin:0px;
+                            padding:0px;
+                        }
+                        </style>
+                        <t t-foreach="data" t-as="o">
+                            <div class="header">
+                                <div>
+                                    <h4>
+                                        <t t-esc="o['company']"/>
+                                    </h4>
+                                    <dl>
+                                        <dd><t t-esc="o['company_vat']"/></dd>
+                                        <dt>Contacto:
+                                            <ul style="list-style:none;">
+                                                <Li style="font-size: 14px; margin-top:5px; color:#454748;"><t t-esc="o['company_phone']"/></Li>
+                                                <Li style="font-size: 14px; margin-top:5px; color:#454748;"><t t-esc="o['company_email']"/></Li>
+                                            </ul>
+                                        </dt>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="head">
+                                <div class="child1">
+                                    <div>
+                                        <p>
+                                            Fecha de Emision:
+                                        </p>
+                                        <div class="border">
+                                            <p style="font-size:16px">
+                                                <span class="bold">
+                                                    <t t-esc="o['emision_date']"/>
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p>
+                                            Fecha de Vencimiento:
+                                        </p>
+                                        <div class="border">
+                                            <p style="font-size:16px">
+                                                <span class="bold">
+                                                    <t t-esc="o['final_date']"/>
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="child2">
+                                <p>
+                                    Cliente: 
+                                </p>
+                                <div class="border">
+                                    <p>
+                                        <span class="bold">
+                                            <t t-esc="o['customer']"/>
+                                        </span>
+                                    </p>
+                                    <p style="font-size: 12px; color:#454748;">
+                                        <t t-esc="o['customer_vat']"/>
+                                    </p>
+                                    <p style="font-size: 12px; color:#454748;">
+                                            <t t-esc="o['customer_phone']"/>
+                                    </p>
+                                    <p style="font-size: 12px; color:#454748;">
+                                            <t t-esc="o['customer_email']"/>
+                                    </p>
+
+                                </div>
+                            </div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Cuota</th>
+                                        <th>Valor de la Cuota</th>
+                                        <th>Costo de Gestion</th>
+                                        <th>Desgravamen</th>
+                                        <!-- <th>Valor de Cuota Total</th> -->
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+                                    <tr>
+                                        <td><t t-esc="o['spo_nro_cuota_ident']"/></td>
+                                        <!-- <td><t t-esc="o['emision_date']"/></td> -->
+                                        <td>S/<t t-esc="o['cuota_value']"/></td>
+                                        <td>S/<t t-esc="o['gestion_cost']"/></td>
+                                        <td>S/<t t-esc="o['desgravamen']"/></td>
+                                        <!-- <td>S/<t t-esc="o['cuota_value_total']"/></td> -->
+                                        <!-- <td><t t-esc="o['final_date']"/></td> -->
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="child2">
+                                <div class="border">
+                                    <p>
+                                        Total a Pagar: 
+                                        <span class="bold">
+                                            S/<t t-esc="o['cuota_value_total']"/>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+        <template id="report_cuota_for_mail_template">
+            <t t-call="web.html_container">
+                <div class="page">
+                    <style type="text/css">
+                        *{
+                            font-family: sans-serif ;
+                        }
+                        .header{
+                            width:100%;
+                        }
+                        table {
+                            border-collapse: collapse;
+                            width: 100%;
+                            border-radius: 20px;
+                        }
+                        th, td {
+                            <!-- border: 1px solid #232528; -->
+                            padding: 10px;
+                            text-align: center;
+                        }
+                        th {
+                            font-weight: lighter;
+                            background-color: #CAC4CE;
+                            border-bottom: 1px solid #232528;
+
+                        }
+                        td{
+                            border-bottom: 0.5px solid #D7D9D7;
+                        }
+
+                        .head{
+                            width:100%;
+                            display: flex;
+                            flex-direction:row;
+                            flex-wrap:wrap;
+                            justify-content:space-between;
+                            margin-bottom:20px;
+                        }   
+                        .child1{
+
+                            float: left;
+                            width:25%;
+                        }
+                        .child2{
+                            margin-top:20px;
+                            float: right;
+                            padding:10px;
+                            <!-- width:25%; -->
+                            display:inline-block;
+                        }
+                        .bold{
+                            font-weight: bold;
+                        }
+                        .block{
+                            display:block;
+                        }
+                        .border{
+                            border-top: solid 1px #D7D9D7;
+                            padding:10px;
+                        }
+                        p{
+                            font-weight: lighter;
+                            margin:0px;
+                            padding:0px;
+                        }
+                    </style>
+                    <t t-foreach="docs" t-as="o">
+                        <div class="header">
+                            <div>
+                                <h4>
+                                    <t t-esc="o.company_id.name"/>
+                                </h4>
+                                <dl>
+                                    <dd><t t-esc="o.company_id.partner_id.spo_display_doc"/></dd>
+                                    <dt>Contacto:
+                                        <ul style="list-style: none;">
+                                            <li style="font-size: 14px; margin-top:5px; color:#454748;"><t t-esc="o.company_id.phone"/></li>
+                                            <li style="font-size: 14px; margin-top:5px; color:#454748;"><t t-esc="o.company_id.email"/></li>
+                                        </ul>
+                                    </dt>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="head">
+                            <div class="child1">
+                                <div>
+                                    <p>
+                                        Fecha de Emision:
+                                    </p>
+                                    <div class="border">
+                                        <p style="font-size:16px">
+                                            <span class="bold">
+                                                <t t-esc="o.spo_emision_date"/>
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p>
+                                        Fecha de Vencimiento:
+                                    </p>
+                                    <div class="border">
+                                        <p style="font-size:16px">
+                                            <span class="bold">
+                                                <t t-esc="o.spo_final_date"/>
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child2">
+                            <p>
+                                Cliente: 
+                            </p>
+                            <div class="border">
+                                <p>
+                                    <span class="bold">
+                                        <t t-esc="o.order_partner_id.name"/>
+                                    </span>
+                                </p>
+                                <p style="font-size: 12px; color:#454748;">
+                                    <t t-esc="o.order_partner_id.spo_display_doc"/>
+                                </p>
+                                <p style="font-size: 12px; color:#454748;">
+                                    <t t-esc="o.order_partner_id.email"/>
+                                </p>
+                                <p style="font-size: 12px; color:#454748;">
+                                    <t t-esc="o.order_partner_id.phone"/>
+                                </p>
+                            </div>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Cuota</th>
+                                    <th>Valor de la Cuota</th>
+                                    <th>Costo de Gestion</th>
+                                    <th>Desgravamen</th>
+                                    <!-- <th>Valor de Cuota Total</th> -->
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                <tr>
+                                    <td><t t-esc="o.spo_nro_cuota_ident"/></td>
+                                    <!-- <td><t t-esc="o['emision_date']"/></td> -->
+                                    <td>S/<t t-esc="o.name"/></td>
+                                    <td>S/<t t-esc="round(o.spo_costo_gestion, 2)"/></td>
+                                    <td>S/<t t-esc="round(o.spo_desgravamen, 2)"/></td>
+                                    <!-- <td>S/<t t-esc="o['cuota_value_total']"/></td> -->
+                                    <!-- <td><t t-esc="o['final_date']"/></td> -->
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="child2">
+                            <div class="border">
+                                <p>
+                                    Total a Pagar: 
+                                    <span class="bold">
+                                        S/<t t-esc="round(o.cuota_total, 2)"/>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </t>
+            
+        </template>
+                    
+                        
+
+
+
+
+</odoo>

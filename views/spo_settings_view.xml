@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+<!-- #####Beneficent -->
+        <!-- ####Beneficent view -->
+        <record id="Beneficiarios_view_tree" model="ir.ui.view">
+            <field name="name">Beneficiarios_tree</field>
+            <field name="model">spo.beneficent.info</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="Beneficiarios_view_form" model="ir.ui.view">
+            <field name="name">Beneficiarios_form</field>
+            <field name="model">spo.beneficent.info</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" required="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="Beneficiarios_action" model="ir.actions.act_window">
+            <field name="name">Tipos de Persona</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">spo.beneficent.info</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                    (0, 0, {'view_mode': 'tree', 'view_id': ref('Beneficiarios_view_tree')}),
+                    (0, 0, {'view_mode': 'form', 'view_id': ref('Beneficiarios_view_form')})]"/>
+            <field name="view_id" ref="Beneficiarios_view_tree"/>
+        </record>
+
+
+        <!-- ######Academic program view -->
+        <record id="Programas_Academicos_view_tree" model="ir.ui.view">
+            <field name="name">Programas_Academicos_tree</field>
+            <field name="model">spo.academic.program.uni.info</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="program"/>
+                    <field name="spo_university_id"/>
+                    <field name="spo_credits_saved" string="CA"/>
+                    <field name="spo_credits_saved_exeption" string="CA Excepción"/>
+                    <field name="spo_average_saved" string="PPA"/>
+                    <field name="spo_average_saved_exception" string="PPA Excepción"/>
+                </tree>
+            </field>
+        </record>
+        <record id="Programas_Academicos_view_form" model="ir.ui.view">
+            <field name="name">Programas_Academicos_form</field>
+            <field name="model">spo.academic.program.uni.info</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="program" required="1"/>
+                            <field name="spo_university_id"  options="{'no_quick_create':True}"/>
+                        </group>
+                        <notebook>
+                            <page string="Parámetros" name="parameters">
+                                <group>
+                                    <group string="Créditos Acumulados">
+                                        <field name="spo_credits_saved" string="Créditos Acumulados"/>
+                                        <field name="spo_credits_saved_exeption" string="Excepción"/>
+                                    </group>
+                                    <group string="Promedio Ponderado Acumulado">
+                                        <field name="spo_average_saved" string="Promedio Ponderado Acumulado"/>
+                                        <field name="spo_average_saved_exception" string="Excepción"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="Programas_Academicos_action" model="ir.actions.act_window">
+            <field name="name">Programas Académicos</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">spo.academic.program.uni.info</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                    (0, 0, {'view_mode': 'tree', 'view_id': ref('Programas_Academicos_view_tree')}),
+                    (0, 0, {'view_mode': 'form', 'view_id': ref('Programas_Academicos_view_form')})]"/>
+            <field name="view_id" ref="Programas_Academicos_view_tree"/>
+        </record>
+
+
+        #########Careers
+        <record id="Carreras_view_tree" model="ir.ui.view">
+            <field name="name">Carreras_tree</field>
+            <field name="model">spo.careers.mixed</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="spo_principal_career"/>
+                    <field name="spo_second_career"/>
+                    <field name="spo_university_id"/>
+                    <field name="spo_academic_program_id"/>
+                    <field name="spo_total_credits"/>
+                    <field name="spo_credits_semester"/>
+                </tree>
+            </field>
+        </record>
+        <record id="Carreras_view_form" model="ir.ui.view">
+            <field name="name">Carreras_form</field>
+            <field name="model">spo.careers.mixed</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="spo_principal_career" required="1"/>
+                                <field name="spo_second_career" attrs="{'readonly':[('spo_principal_career','=',False)]}"/>
+                                <field name="spo_university_id" required="1"  options="{'no_quick_create':True}"/>
+                                <field name="spo_academic_program_uni_id" domain="[('spo_university_id','=',spo_university_id)]" required="1" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Parámetros" name="parameters">
+                                <group>
+                                    <group>
+                                        <field name="spo_total_credits"/>
+                                        <field name="spo_credits_semester"/>
+                                        <field name="spo_CCU"/>
+                                        <field name="spo_CM"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="Carreras_action" model="ir.actions.act_window">
+            <field name="name">Carreras</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">spo.careers.mixed</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                    (0, 0, {'view_mode': 'tree', 'view_id': ref('Carreras_view_tree')}),
+                    (0, 0, {'view_mode': 'form', 'view_id': ref('Carreras_view_form')})]"/>
+            <field name="view_id" ref="Carreras_view_tree"/>
+        </record>
+        
+        <!-- ####Universities -->
+        <record id="Universidades_view_tree" model="ir.ui.view">
+            <field name="name">Universidades_tree</field>
+            <field name="model">spo.university.info</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" string="Universidad"/>
+                    <field name="short_name"/>
+                    <field name="spo_CGS" string="Costo de Gestíon(PEN)"/>
+                    <field name="spo_TD" string="Tasa Desgravamen"/>
+                    <field name="spo_TIA" string="Tasa Insterés Anual"/>
+                </tree>
+            </field>
+        </record>
+        <record id="Universidades_view_form" model="ir.ui.view">
+            <field name="name">Universidades_form</field>
+            <field name="model">spo.university.info</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name" placeholder="Nombre" required="1" string="Universidad"/>
+                            <field name="short_name" placeholder="Nombre Corto" required="1"/>
+                        </group>
+                        <notebook>
+                            <page string="Parametros" >
+                                <group>
+                                    <field name="spo_CCU"/>
+                                    <field name="spo_CM"/>
+                                    <field name="spo_CGS" string="Costo de Gestíon(PEN)"/>
+                                    <field name="spo_TD" string="Tasa Desgravamen"/>
+                                    <field name="spo_TIA" string="Tasa Insterés Anual"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="Universidades_action" model="ir.actions.act_window">
+            <field name="name">Universidades</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">spo.university.info</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                    (0, 0, {'view_mode': 'tree', 'view_id': ref('Universidades_view_tree')}),
+                    (0, 0, {'view_mode': 'form', 'view_id': ref('Universidades_view_form')})]"/>
+            <field name="view_id" ref="Universidades_view_tree"/>
+        </record>
+
+
+
+<!-- #####credit oportunities -->
+        ##Risk Motive
+        <record id="Motivos_view_tree" model="ir.ui.view">
+            <field name="name">Motivos_tree</field>
+            <field name="model">spo.risk.motive.info</field>
+            <field name="arch" type="xml">
+                <tree multi_edit="1">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="Motivos_view_form" model="ir.ui.view">
+            <field name="name">Motivos_form</field>
+            <field name="model">spo.risk.motive.info</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="ej. Morosidad" modifiers="{&quot;required&quot;: true}"/>
+                        </h1>
+                    </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="Motivos_action" model="ir.actions.act_window">
+            <field name="name">Motivos</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">spo.risk.motive.info</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                    (0, 0, {'view_mode': 'tree', 'view_id': ref('Motivos_view_tree')}),
+                    (0, 0, {'view_mode': 'form', 'view_id': ref('Motivos_view_form')})]"/>
+            <field name="view_id" ref="Motivos_view_tree"/>
+        </record>
+
+
+        ####States1
+        <record id="Etapas1_view_tree" model="ir.ui.view">
+            <field name="name">Etapas1_tree</field>
+            <field name="model">spo.state.1.info</field>
+            <field name="arch" type="xml">
+                <tree multi_edit="1">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="Etapas1_view_form" model="ir.ui.view">
+            <field name="name">Etapas1_form</field>
+            <field name="model">spo.state.1.info</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="ej. Morosidad" modifiers="{&quot;required&quot;: true}"/>
+                        </h1>
+                    </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="Etapas1_action" model="ir.actions.act_window">
+            <field name="name">Etapas</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">spo.state.1.info</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                    (0, 0, {'view_mode': 'tree', 'view_id': ref('Etapas1_view_tree')}),
+                    (0, 0, {'view_mode': 'form', 'view_id': ref('Etapas1_view_form')})]"/>
+            <field name="view_id" ref="Etapas1_view_tree"/>
+        </record>
+
+        ####States2
+        <record id="Etapas2_view_tree" model="ir.ui.view">
+            <field name="name">Etapas2_tree</field>
+            <field name="model">spo.state.2.info</field>
+            <field name="arch" type="xml">
+                <tree multi_edit="1">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="Etapas2_view_form" model="ir.ui.view">
+            <field name="name">Etapas2_form</field>
+            <field name="model">spo.state.2.info</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="ej. Morosidad" modifiers="{&quot;required&quot;: true}"/>
+                        </h1>
+                    </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="Etapas2_action" model="ir.actions.act_window">
+            <field name="name">Etapas</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">spo.state.2.info</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                    (0, 0, {'view_mode': 'tree', 'view_id': ref('Etapas2_view_tree')}),
+                    (0, 0, {'view_mode': 'form', 'view_id': ref('Etapas2_view_form')})]"/>
+            <field name="view_id" ref="Etapas2_view_tree"/>
+        </record>
+
+        ####States3
+        <record id="Etapas3_view_tree" model="ir.ui.view">
+            <field name="name">Etapas3_tree</field>
+            <field name="model">spo.state.3.info</field>
+            <field name="arch" type="xml">
+                <tree multi_edit="1">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="Etapas3_view_form" model="ir.ui.view">
+            <field name="name">Etapas3_form</field>
+            <field name="model">spo.state.3.info</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="ej. Morosidad" modifiers="{&quot;required&quot;: true}"/>
+                        </h1>
+                    </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="Etapas3_action" model="ir.actions.act_window">
+            <field name="name">Etapas</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">spo.state.3.info</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                    (0, 0, {'view_mode': 'tree', 'view_id': ref('Etapas3_view_tree')}),
+                    (0, 0, {'view_mode': 'form', 'view_id': ref('Etapas3_view_form')})]"/>
+            <field name="view_id" ref="Etapas3_view_tree"/>
+        </record>
+
+        ####States4
+        <record id="Etapas4_view_tree" model="ir.ui.view">
+            <field name="name">Etapas4_tree</field>
+            <field name="model">spo.state.4.info</field>
+            <field name="arch" type="xml">
+                <tree multi_edit="1">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="Etapas4_view_form" model="ir.ui.view">
+            <field name="name">Etapas4_form</field>
+            <field name="model">spo.state.4.info</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="ej. Morosidad" modifiers="{&quot;required&quot;: true}"/>
+                        </h1>
+                    </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="Etapas4_action" model="ir.actions.act_window">
+            <field name="name">Etapas</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">spo.state.4.info</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                    (0, 0, {'view_mode': 'tree', 'view_id': ref('Etapas4_view_tree')}),
+                    (0, 0, {'view_mode': 'form', 'view_id': ref('Etapas4_view_form')})]"/>
+            <field name="view_id" ref="Etapas4_view_tree"/>
+        </record>
+
+        ####States5
+        <record id="Etapas5_view_tree" model="ir.ui.view">
+            <field name="name">Etapas5_tree</field>
+            <field name="model">spo.state.5.info</field>
+            <field name="arch" type="xml">
+                <tree multi_edit="1">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="Etapas5_view_form" model="ir.ui.view">
+            <field name="name">Etapas5_form</field>
+            <field name="model">spo.state.5.info</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="ej. Morosidad" modifiers="{&quot;required&quot;: true}"/>
+                        </h1>
+                    </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="Etapas5_action" model="ir.actions.act_window">
+            <field name="name">Etapas</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">spo.state.5.info</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                    (0, 0, {'view_mode': 'tree', 'view_id': ref('Etapas5_view_tree')}),
+                    (0, 0, {'view_mode': 'form', 'view_id': ref('Etapas5_view_form')})]"/>
+            <field name="view_id" ref="Etapas5_view_tree"/>
+        </record>
+
+        ####States6
+        <record id="Etapas6_view_tree" model="ir.ui.view">
+            <field name="name">Etapas6_tree</field>
+            <field name="model">spo.state.6.info</field>
+            <field name="arch" type="xml">
+                <tree multi_edit="1">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="Etapas6_view_form" model="ir.ui.view">
+            <field name="name">Etapas6_form</field>
+            <field name="model">spo.state.6.info</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="ej. Morosidad" modifiers="{&quot;required&quot;: true}"/>
+                        </h1>
+                    </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="Etapas6_action" model="ir.actions.act_window">
+            <field name="name">Etapas</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">spo.state.6.info</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                    (0, 0, {'view_mode': 'tree', 'view_id': ref('Etapas6_view_tree')}),
+                    (0, 0, {'view_mode': 'form', 'view_id': ref('Etapas6_view_form')})]"/>
+            <field name="view_id" ref="Etapas6_view_tree"/>
+        </record>
+        <record id="valores_cuotas_view_tree" model="ir.ui.view">
+            <field name="name">valores.cuotas.view.tree</field>
+            <field name="model">spo.cuotas.info</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="name"/>
+                    <field name="spo_Type_installment"/>
+                    <field name="spo_academic_program_id"/>
+                    <field name="spo_miss_semester"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_spo_cuotas_info_filter" model="ir.ui.view">
+            <field name="name">view.spo.cuotas.info.filter</field>
+            <field name="model">spo.cuotas.info</field>
+            <field name="arch" type="xml">
+                <search string="Buscar cuota">
+                        <separator/>
+                        <filter string="Cuotas de Estudiante" name="estu" domain="[('spo_Type_installment','=','student')]"/>
+                        <filter string="Cuotas de Graduado" name="gradu" domain="[('spo_Type_installment','=','graduate')]"/>
+                        <separator/>
+                        <group>
+                            <filter name="program" string="Programas Académicos" context="{'group_by': 'spo_academic_program_id'}"/>
+                            <filter name="semester" string="Semestres Pendientes" context="{'group_by': 'spo_miss_semester'}"/>
+                            <filter name="type" string="Tipos" context="{'group_by': 'spo_Type_installment'}"/>
+                        </group>
+                    </search>
+            </field>
+        </record>
+        <record id="valores_cuotas_action" model="ir.actions.act_window">
+            <field name="name">Cuota</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">spo.cuotas.info</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                    (0, 0, {'view_mode': 'tree', 'view_id': ref('valores_cuotas_view_tree')})]"/>
+            <field name="view_id" ref="valores_cuotas_view_tree"/>
+            <field name="search_view_id" ref="sponsor_educative_credit.view_spo_cuotas_info_filter"/>
+        </record>
+    </data>
+    
+
+</odoo>

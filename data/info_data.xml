@@ -1,0 +1,985 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <!-- <record model="res.groups" id="base.group_user"> <field name="implied_ids" eval="[(4, ref('product.group_product_variant'))]"/> </record> -->
+    <data noupdate="1">
+        ########Beneficent ###########
+        <record id="spo_beneficent_1" model="spo.beneficent.info">
+            <field name="name">BENEFICIARIO</field>
+            <field name="id">1</field>
+        </record>
+        
+        <record id="spo_beneficent_2" model="spo.beneficent.info">
+            <field name="name">FIADOR SOLIDARIO</field>
+            <field name="id">2</field>
+        </record>
+        <record id="spo_beneficent_3" model="spo.beneficent.info">
+            <field name="name">REPRESENTANTE LEGAL</field>
+            <field name="id">3</field>
+        </record>
+
+        ######## Academic Program ########
+        <record id="spo_academic_program_1" model="spo.academic.program.info">
+            <field name="name">PREGRADO REGULAR</field>
+            <field name="id">1</field>
+        </record>
+        <record id="spo_academic_program_2" model="spo.academic.program.info">
+            <field name="name">PREGRADO REGULAR(COAR)</field>
+            <field name="id">2</field>
+        </record>
+        <record id="spo_academic_program_3" model="spo.academic.program.info">
+            <field name="name">CPEL</field>
+            <field name="id">3</field>
+        </record>
+
+
+        #############Careers#####################################
+        <record id="spo_careers_PR_1" model="spo.careers.info">
+            <field name="name">ADMINISTRACIÓN</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_2" model="spo.careers.info">
+            <field name="name">ADMINISTRACIÓN DE LA SALUD</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_3" model="spo.careers.info">
+            <field name="name">ADMINISTRACIÓN EN TURISMO</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_4" model="spo.careers.info">
+            <field name="name">ADMINISTRACIÓN HOTELERA</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_5" model="spo.careers.info">
+            <field name="name">ADMINISTRACIÓN Y EMPRENDIMIENTO</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_6" model="spo.careers.info">
+            <field name="name">ADMINISTRACIÓN Y FINANZAS CORPORATIVAS</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_7" model="spo.careers.info">
+            <field name="name">ADMINISTRACIÓN Y GESTIÓN AMBIENTAL</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_8" model="spo.careers.info">
+            <field name="name">ARQUITECTURA, URBANISMO Y TERRITORIO</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_9" model="spo.careers.info">
+            <field name="name">ARTE CULINARIO</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_10" model="spo.careers.info">
+            <field name="name">ARTE Y DISEÑO EMPRESARIAL</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_11" model="spo.careers.info">
+            <field name="name">COMUNICACIONES</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_12" model="spo.careers.info">
+            <field name="name">DERECHO</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_13" model="spo.careers.info">
+            <field name="name">ECONOMÍA</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_14" model="spo.careers.info">
+            <field name="name">ECONOMÍA Y FINANZAS</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_15" model="spo.careers.info">
+            <field name="name">ECONOMÍA Y NEGOCIOS INTERNACIONALES</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_16" model="spo.careers.info">
+            <field name="name">GESTIÓN E INNOVACIÓN EN GASTRONOMÍA</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_18" model="spo.careers.info">
+            <field name="name">INGENIERÍA AGROINDUSTRIAL</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_19" model="spo.careers.info">
+            <field name="name">INGENIERÍA AMBIENTAL</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_20" model="spo.careers.info">
+            <field name="name">INGENIERÍA CIVIL</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_21" model="spo.careers.info">
+            <field name="name">INGENIERÍA DE SISTEMAS DE INFORMACIÓN</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_22" model="spo.careers.info">
+            <field name="name">INGENIERÍA DE SOFTWARE</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_23" model="spo.careers.info">
+            <field name="name">INGENIERÍA EMPRESARIAL</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_24" model="spo.careers.info">
+            <field name="name">INGENIERÍA EN INDUSTRIAS ALIMENTARIAS</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_25" model="spo.careers.info">
+            <field name="name">INGENIERÍA INDUSTRIAL Y COMERCIAL</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_26" model="spo.careers.info">
+            <field name="name">INGENIERÍA MECATRÓNICA</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_27" model="spo.careers.info">
+            <field name="name">INTERNACIONAL BUSINESS</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_28" model="spo.careers.info">
+            <field name="name">MARKETING</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_29" model="spo.careers.info">
+            <field name="name">NUTRICIÓN Y DIETÉTICA</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_30" model="spo.careers.info">
+            <field name="name">PSICOLOGÍA</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_31" model="spo.careers.info">
+            <field name="name">RELACIONES INTERNACIONALES</field>
+            <field name="spo_type_AP_id">1</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+
+
+
+
+        <record id="spo_careers_PR_COAR_1" model="spo.careers.info">
+            <field name="name">ADMINISTRACIÓN</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_2" model="spo.careers.info">
+            <field name="name">ADMINISTRACIÓN DE LA SALUD</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_3" model="spo.careers.info">
+            <field name="name">ADMINISTRACIÓN EN TURISMO</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_4" model="spo.careers.info">
+            <field name="name">ADMINISTRACIÓN HOTELERA</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_5" model="spo.careers.info">
+            <field name="name">ADMINISTRACIÓN Y EMPRENDIMIENTO</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_6" model="spo.careers.info">
+            <field name="name">ADMINISTRACIÓN Y FINANZAS CORPORATIVAS</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_7" model="spo.careers.info">
+            <field name="name">ADMINISTRACIÓN Y GESTIÓN AMBIENTAL</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_8" model="spo.careers.info">
+            <field name="name">ARQUITECTURA, URBANISMO Y TERRITORIO</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_9" model="spo.careers.info">
+            <field name="name">ARTE CULINARIO</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_10" model="spo.careers.info">
+            <field name="name">ARTE Y DISEÑO EMPRESARIAL</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_11" model="spo.careers.info">
+            <field name="name">COMUNICACIONES</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_12" model="spo.careers.info">
+            <field name="name">DERECHO</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_13" model="spo.careers.info">
+            <field name="name">ECONOMÍA</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_14" model="spo.careers.info">
+            <field name="name">ECONOMÍA Y FINANZAS</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_15" model="spo.careers.info">
+            <field name="name">ECONOMÍA Y NEGOCIOS INTERNACIONALES</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_16" model="spo.careers.info">
+            <field name="name">GESTIÓN E INNOVACIÓN EN GASTRONOMÍA</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_18" model="spo.careers.info">
+            <field name="name">INGENIERÍA AGROINDUSTRIAL</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_19" model="spo.careers.info">
+            <field name="name">INGENIERÍA AMBIENTAL</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_20" model="spo.careers.info">
+            <field name="name">INGENIERÍA CIVIL</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_21" model="spo.careers.info">
+            <field name="name">INGENIERÍA DE SISTEMAS DE INFORMACIÓN</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_22" model="spo.careers.info">
+            <field name="name">INGENIERÍA DE SOFTWARE</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_23" model="spo.careers.info">
+            <field name="name">INGENIERÍA EMPRESARIAL</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_24" model="spo.careers.info">
+            <field name="name">INGENIERÍA EN INDUSTRIAS ALIMENTARIAS</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_25" model="spo.careers.info">
+            <field name="name">INGENIERÍA INDUSTRIAL Y COMERCIAL</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_26" model="spo.careers.info">
+            <field name="name">INGENIERÍA MECATRÓNICA</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_27" model="spo.careers.info">
+            <field name="name">INTERNACIONAL BUSINESS</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_28" model="spo.careers.info">
+            <field name="name">MARKETING</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_29" model="spo.careers.info">
+            <field name="name">NUTRICIÓN Y DIETÉTICA</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_30" model="spo.careers.info">
+            <field name="name">PSICOLOGÍA</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_PR_COAR_31" model="spo.careers.info">
+            <field name="name">RELACIONES INTERNACIONALES</field>
+            <field name="spo_type_AP_id">2</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+
+
+
+
+        <record id="spo_careers_CPEL_1" model="spo.careers.info">
+            <field name="name">ADMINISTRACIÓN DE EMPRESAS</field>
+            <field name="spo_type_AP_id">3</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_CPEL_2" model="spo.careers.info">
+            <field name="name">ADMINISTRACIÓN Y FINANZAS</field>
+            <field name="spo_type_AP_id">3</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_CPEL_3" model="spo.careers.info">
+            <field name="name">COMUNICACIÓN Y PUBLICIDAD</field>
+            <field name="spo_type_AP_id">3</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_CPEL_4" model="spo.careers.info">
+            <field name="name">CONTABILIDAD</field>
+            <field name="spo_type_AP_id">3</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_CPEL_5" model="spo.careers.info">
+            <field name="name">INGENIERÍA EMPRESARIAL Y DE SISTEMAS</field>
+            <field name="spo_type_AP_id">3</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_CPEL_6" model="spo.careers.info">
+            <field name="name">INGENIERÍA INDUSTRIAL</field>
+            <field name="spo_type_AP_id">3</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_CPEL_7" model="spo.careers.info">
+            <field name="name">MARKETING Y GESTIÓN COMERCIAL</field>
+            <field name="spo_type_AP_id">3</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+        <record id="spo_careers_CPEL_8" model="spo.careers.info">
+            <field name="name">NEGOCIOS INTERNACIONALES</field>
+            <field name="spo_type_AP_id">3</field>
+            <field name="spo_type_career">prim</field>
+        </record>
+
+    ##########Second careers
+        <record id="spo_second_careers_1" model="spo.careers.info">
+            <field name="name">BUSINESS</field>
+            <field name="spo_type_career">secu</field>
+        </record>
+        <record id="spo_second_careers_2" model="spo.careers.info">
+            <field name="name">HOSPITALITY MANAGEMENT</field>
+            <field name="spo_type_career">secu</field>
+        </record>
+        <record id="spo_second_careers_3" model="spo.careers.info">
+            <field name="name">INTERNATIONAL BUSINESS</field>
+            <field name="spo_type_career">secu</field>
+        </record>
+        <record id="spo_second_careers_4" model="spo.careers.info">
+            <field name="name">MARKETING</field>
+            <field name="spo_type_career">secu</field>
+        </record>
+        
+        
+    states
+        states1
+        <record id="spo_states1_states_1" model="spo.state.1.info">
+            <field name="name">Pendiente</field>
+        </record>
+        <record id="spo_states1_states_2" model="spo.state.1.info">
+            <field name="name">Agendada</field>
+        </record>
+        <record id="spo_states1_states_3" model="spo.state.1.info">
+            <field name="name">Completada</field>
+        </record>
+        <record id="spo_states1_states_4" model="spo.state.1.info">
+            <field name="name">No realizada</field>
+        </record>
+
+
+        states2
+        <record id="spo_states2_states_1" model="spo.state.2.info">
+            <field name="name">Documentos Solicitados</field>
+        </record>
+        <record id="spo_states2_states_2" model="spo.state.2.info">
+            <field name="name">No Se Solicita</field>
+        </record>
+        <record id="spo_states2_states_3" model="spo.state.2.info">
+            <field name="name">Completada</field>
+        </record>
+        <record id="spo_states2_states_4" model="spo.state.2.info">
+            <field name="name">No Presento</field>
+        </record>
+
+
+        states3
+        <record id="spo_states3_states_1" model="spo.state.3.info">
+            <field name="name">Enviado</field>
+        </record>
+        <record id="spo_states3_states_2" model="spo.state.3.info">
+            <field name="name">No Aplica</field>
+        </record>
+        <record id="spo_states3_states_3" model="spo.state.3.info">
+            <field name="name">No Se Envía</field>
+        </record>
+
+
+        states4
+        <record id="spo_states4_states_1" model="spo.state.4.info">
+            <field name="name">Comité de Riesgos</field>
+        </record>
+        <record id="spo_states4_states_2" model="spo.state.4.info">
+            <field name="name">Apto</field>
+        </record>
+        <record id="spo_states4_states_3" model="spo.state.4.info">
+            <field name="name">No Apto</field>
+        </record>
+
+
+        states5
+        <record id="spo_states5_states_1" model="spo.state.5.info">
+            <field name="name">Apto con Riesgo</field>
+        </record>
+        <record id="spo_states5_states_2" model="spo.state.5.info">
+            <field name="name">Reisgo Académico</field>
+        </record>
+        <record id="spo_states5_states_3" model="spo.state.5.info">
+            <field name="name">No Apto</field>
+        </record>
+        <record id="spo_states5_states_4" model="spo.state.5.info">
+            <field name="name">Cambio de Fiador</field>
+        </record>
+        <record id="spo_states5_states_5" model="spo.state.5.info">
+            <field name="name">No aplica</field>
+        </record>
+
+
+
+        states6
+        <record id="spo_states6_states_1" model="spo.state.6.info">
+            <field name="name">Apto</field>
+        </record>
+        <record id="spo_states6_states_2" model="spo.state.6.info">
+            <field name="name">Simulacíon</field>
+        </record>
+        <record id="spo_states6_states_3" model="spo.state.6.info">
+            <field name="name">No apto</field>
+        </record>
+
+    spo_contact_states
+        states1
+        <record id="spo_contract_states1_1" model="spo.contract.states.info">
+            <field name="name">Apto</field>
+            <field name="type_state">1</field>
+        </record>
+        <record id="spo_contract_states1_2" model="spo.contract.states.info">
+            <field name="name">Simulacíon</field>
+            <field name="type_state">1</field>
+        </record>
+        <record id="spo_contract_states1_3" model="spo.contract.states.info">
+            <field name="name">No apto</field>
+            <field name="type_state">1</field>
+        </record>
+
+        states2
+        <record id="spo_contract_states2_1" model="spo.contract.states.info">
+            <field name="name">Aceptada</field>
+            <field name="type_state">2</field>
+        </record>
+        <record id="spo_contract_states2_2" model="spo.contract.states.info">
+            <field name="name">No Aplica</field>
+            <field name="type_state">2</field>
+
+        </record>
+        <record id="spo_contract_states2_3" model="spo.contract.states.info">
+            <field name="name">Rechazada</field>
+            <field name="type_state">2</field>
+        </record>
+
+        states3
+        <record id="spo_contract_states3_1" model="spo.contract.states.info">
+            <field name="name">Enviado</field>
+            <field name="type_state">3</field>
+        </record>
+        <record id="spo_contract_states3_2" model="spo.contract.states.info">
+            <field name="name">Por Enviar</field>
+            <field name="type_state">3</field>
+        </record>
+
+        states4
+        <record id="spo_contract_states4_1" model="spo.contract.states.info">
+            <field name="name">Pendiente</field>
+            <field name="type_state">4</field>
+        </record>
+        <record id="spo_contract_states4_2" model="spo.contract.states.info">
+            <field name="name">Firma Completa</field>
+            <field name="type_state">4</field>
+        </record>
+        <record id="spo_contract_states4_2" model="spo.contract.states.info">
+            <field name="name">Rechazado</field>
+            <field name="type_state">4</field>
+        </record>
+    spo_credits_semester
+
+        PR
+        <record id="spo_credits_semester1_1" model="spo.credits.semester.info">
+            <field name="academic_program_id" ref="spo_academic_program_1"/>
+            <field name="second_career">False</field>
+            <field name="value">20</field>
+
+        </record>
+        <record id="spo_credits_semester1_2" model="spo.credits.semester.info">
+            <field name="academic_program_id" ref="spo_academic_program_1"/>
+            <field name="second_career">True</field>
+            <field name="value">21</field>
+        </record>
+
+        PR(COAR)
+        <record id="spo_credits_semester2_1" model="spo.credits.semester.info">
+            <field name="academic_program_id" ref="spo_academic_program_2"/>
+            <field name="second_career">False</field>
+            <field name="value">20</field>
+        </record>
+        <record id="spo_credits_semester2_2" model="spo.credits.semester.info">
+            <field name="academic_program_id" ref="spo_academic_program_2"/>
+            <field name="second_career">True</field>
+            <field name="value">23</field>
+        </record>
+
+        CPEL
+        <record id="spo_credits_semester3_1" model="spo.credits.semester.info">
+            <field name="academic_program_id" ref="spo_academic_program_3"/>
+            <field name="second_career">False</field>
+            <field name="value">25</field>
+        </record>
+
+    Semester_Miss
+        <record id="spo_miss_semester1" model="spo.miss.semester">
+            <field name="number">1</field>
+        </record>
+        <record id="spo_miss_semester2" model="spo.miss.semester">
+            <field name="number">2</field>
+        </record>
+        <record id="spo_miss_semester3" model="spo.miss.semester">
+            <field name="number">3</field>
+        </record>
+        <record id="spo_miss_semester4" model="spo.miss.semester">
+            <field name="number">4</field>
+        </record>
+        <record id="spo_miss_semester5" model="spo.miss.semester">
+            <field name="number">5</field>
+        </record>
+        <record id="spo_miss_semester6" model="spo.miss.semester">
+            <field name="number">6</field>
+        </record>
+        <record id="spo_miss_semester7" model="spo.miss.semester">
+            <field name="number">7</field>
+        </record>
+        <record id="spo_miss_semester8" model="spo.miss.semester">
+            <field name="number">8</field>
+        </record>
+        <record id="spo_miss_semester9" model="spo.miss.semester">
+            <field name="number">9</field>
+        </record>
+        <record id="spo_miss_semester10" model="spo.miss.semester">
+            <field name="number">10</field>
+        </record>
+
+        Pregrado Regular Estudiante
+        <record id="spo_attribute_value1_student_pr" model="spo.cuotas.info">
+            <field name="spo_Type_installment">student</field>
+            <field name="name">300</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester1" />
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_1"/>
+        </record>
+        <record id="spo_attribute_value2_student_pr" model="spo.cuotas.info">
+            <field name="spo_Type_installment">student</field>
+            <field name="name">400</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester2"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_1"/>
+        </record>
+        <record id="spo_attribute_value3_student_pr" model="spo.cuotas.info">
+            <field name="spo_Type_installment">student</field>
+            <field name="name">470</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester3"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_1"/>
+        </record>
+        <record id="spo_attribute_value4_student_pr" model="spo.cuotas.info">
+            <field name="spo_Type_installment">student</field>
+            <field name="name">500</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester4"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_1"/>
+        </record>
+        <record id="spo_attribute_value5_student_pr" model="spo.cuotas.info">
+            <field name="spo_Type_installment">student</field>
+            <field name="name">550</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester5"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_1"/>
+        </record>
+        <record id="spo_attribute_value6_student_pr" model="spo.cuotas.info">
+            <field name="spo_Type_installment">student</field>
+            <field name="name">560</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester6"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_1"/>
+        </record>
+        <record id="spo_attribute_value7_student_pr" model="spo.cuotas.info">
+            <field name="spo_Type_installment">student</field>
+            <field name="name">630</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester7"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_1"/>
+        </record>
+        <record id="spo_attribute_value8_student_pr" model="spo.cuotas.info">
+            <field name="spo_Type_installment">student</field>
+            <field name="name">700</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester8"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_1"/>
+        </record>
+        <record id="spo_attribute_value9_student_pr" model="spo.cuotas.info">
+            <field name="spo_Type_installment">student</field>
+            <field name="name">750</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester9"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_1"/>
+        </record>
+        <record id="spo_attribute_value10_student_pr" model="spo.cuotas.info">
+            <field name="spo_Type_installment">student</field>
+            <field name="name">800</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester10"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_1"/>
+        </record>
+
+        Pregrado Regular(coar) Estudiante
+        <record id="spo_attribute_value1_student_coar" model="spo.cuotas.info">
+            <field name="spo_Type_installment">student</field>
+            <field name="name">255</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester1"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_2"/>
+        </record>
+        <record id="spo_attribute_value2_student_coar" model="spo.cuotas.info">
+            <field name="spo_Type_installment">student</field>
+            <field name="name">255</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester2"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_2"/>
+        </record>
+        <record id="spo_attribute_value3_student_coar" model="spo.cuotas.info">
+            <field name="spo_Type_installment">student</field>
+            <field name="name">255</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester3"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_2"/>
+        </record>
+        <record id="spo_attribute_value4_student_coar" model="spo.cuotas.info">
+            <field name="spo_Type_installment">student</field>
+            <field name="name">255</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester4"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_2"/>
+        </record>
+        <record id="spo_attribute_value5_student_coar" model="spo.cuotas.info">
+            <field name="spo_Type_installment">student</field>
+            <field name="name">255</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester5"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_2"/>
+        </record>
+        <record id="spo_attribute_value6_student_coar" model="spo.cuotas.info">
+            <field name="spo_Type_installment">student</field>
+            <field name="name">255</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester6"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_2"/>
+        </record>
+        <record id="spo_attribute_value7_student_coar" model="spo.cuotas.info">
+            <field name="spo_Type_installment">student</field>
+            <field name="name">255</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester7"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_2"/>
+        </record>
+        <record id="spo_attribute_value8_student_coar" model="spo.cuotas.info">
+            <field name="spo_Type_installment">student</field>
+            <field name="name">255</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester8"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_2"/>
+        </record>
+        <record id="spo_attribute_value9_student_coar" model="spo.cuotas.info">
+            <field name="spo_Type_installment">student</field>
+            <field name="name">255</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester9"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_2"/>
+        </record>
+        <record id="spo_attribute_value10_student_coar" model="spo.cuotas.info">
+            <field name="spo_Type_installment">student</field>
+            <field name="name">255</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester10"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_2"/>
+        </record>
+
+        CPEL Estudiante
+        <record id="spo_attribute_value1_student_cpel" model="spo.cuotas.info">
+            <field name="spo_Type_installment">student</field>
+            <field name="name">220</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester1"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_3"/>
+        </record>
+        <record id="spo_attribute_value2_student_cpel" model="spo.cuotas.info">
+            <field name="spo_Type_installment">student</field>
+            <field name="name">240</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester2"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_3"/>
+        </record>
+        <record id="spo_attribute_value3_student_cpel" model="spo.cuotas.info">
+            <field name="spo_Type_installment">student</field>
+            <field name="name">270</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester3"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_3"/>
+        </record>
+        <record id="spo_attribute_value4_student_cpel" model="spo.cuotas.info">
+            <field name="spo_Type_installment">student</field>
+            <field name="name">300</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester4"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_3"/>
+        </record>
+        <record id="spo_attribute_value5_student_cpel" model="spo.cuotas.info">
+            <field name="spo_Type_installment">student</field>
+            <field name="name">350</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester5"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_3"/>
+        </record>
+        <record id="spo_attribute_value6_student_cpel" model="spo.cuotas.info">
+            <field name="spo_Type_installment">student</field>
+            <field name="name">450</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester6"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_3"/>
+        </record>
+        <record id="spo_attribute_value7_student_cpel" model="spo.cuotas.info">
+            <field name="spo_Type_installment">student</field>
+            <field name="name">400</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester7"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_3"/>
+        </record>
+        <record id="spo_attribute_value8_student_cpel" model="spo.cuotas.info">
+            <field name="spo_Type_installment">student</field>
+            <field name="name">450</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester8"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_3"/>
+        </record>
+
+
+
+        Pregrado Regular Graduado
+        <record id="spo_attribute_value1_graduate_pr" model="spo.cuotas.info">
+            <field name="spo_Type_installment">graduate</field>
+            <field name="name">600</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester1"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_1"/>
+        </record>
+        <record id="spo_attribute_value2_graduate_pr" model="spo.cuotas.info">
+            <field name="spo_Type_installment">graduate</field>
+            <field name="name">800</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester2"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_1"/>
+        </record>
+        <record id="spo_attribute_value3_graduate_pr" model="spo.cuotas.info">
+            <field name="spo_Type_installment">graduate</field>
+            <field name="name">940</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester3"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_1"/>
+        </record>
+        <record id="spo_attribute_value4_graduate_pr" model="spo.cuotas.info">
+            <field name="spo_Type_installment">graduate</field>
+            <field name="name">1000</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester4"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_1"/>
+        </record>
+        <record id="spo_attribute_value5_graduate_pr" model="spo.cuotas.info">
+            <field name="spo_Type_installment">graduate</field>
+            <field name="name">1000</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester5"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_1"/>
+        </record>
+        <record id="spo_attribute_value6_graduate_pr" model="spo.cuotas.info">
+            <field name="spo_Type_installment">graduate</field>
+            <field name="name">1000</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester6"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_1"/>
+        </record>
+        <record id="spo_attribute_value7_graduate_pr" model="spo.cuotas.info">
+            <field name="spo_Type_installment">graduate</field>
+            <field name="name">1000</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester7"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_1"/>
+        </record>
+        <record id="spo_attribute_value8_graduate_pr" model="spo.cuotas.info">
+            <field name="spo_Type_installment">graduate</field>
+            <field name="name">1200</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester8"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_1"/>
+        </record>
+        <record id="spo_attribute_value9_graduate_pr" model="spo.cuotas.info">
+            <field name="spo_Type_installment">graduate</field>
+            <field name="name">1200</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester9"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_1"/>
+        </record>
+        <record id="spo_attribute_value10_graduate_pr" model="spo.cuotas.info">
+            <field name="spo_Type_installment">graduate</field>
+            <field name="name">1200</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester10"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_1"/>
+        </record>
+
+        Pregrado Regular(coar) Graduado
+        <record id="spo_attribute_value1_graduate_coar" model="spo.cuotas.info">
+            <field name="spo_Type_installment" >graduate</field>
+            <field name="name">890</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester1"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_2"/>
+        </record>
+        <record id="spo_attribute_value2_graduate_coar" model="spo.cuotas.info">
+            <field name="spo_Type_installment" >graduate</field>
+            <field name="name">890</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester2"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_2"/>
+        </record>
+        <record id="spo_attribute_value3_graduate_coar" model="spo.cuotas.info">
+            <field name="spo_Type_installment" >graduate</field>
+            <field name="name">890</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester3"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_2"/>
+        </record>
+        <record id="spo_attribute_value4_graduate_coar" model="spo.cuotas.info">
+            <field name="spo_Type_installment" >graduate</field>
+            <field name="name">890</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester4"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_2"/>
+        </record>
+        <record id="spo_attribute_value5_graduate_coar" model="spo.cuotas.info">
+            <field name="spo_Type_installment" >graduate</field>
+            <field name="name">890</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester5"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_2"/>
+        </record>
+        <record id="spo_attribute_value6_graduate_coar" model="spo.cuotas.info">
+            <field name="spo_Type_installment" >graduate</field>
+            <field name="name">890</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester6"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_2"/>
+        </record>
+        <record id="spo_attribute_value7_graduate_coar" model="spo.cuotas.info">
+            <field name="spo_Type_installment" >graduate</field>
+            <field name="name">890</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester7"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_2"/>
+        </record>
+        <record id="spo_attribute_value8_graduate_coar" model="spo.cuotas.info">
+            <field name="spo_Type_installment" >graduate</field>
+            <field name="name">890</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester8"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_2"/>
+        </record>
+        <record id="spo_attribute_value9_graduate_coar" model="spo.cuotas.info">
+            <field name="spo_Type_installment" >graduate</field>
+            <field name="name">890</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester9"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_2"/>
+        </record>
+        <record id="spo_attribute_value10_graduate_coar" model="spo.cuotas.info">
+            <field name="spo_Type_installment" >graduate</field>
+            <field name="name">890</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester10"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_2"/>
+        </record>
+
+
+        
+        CPEL GRaduado
+        <record id="spo_attribute_value1_graduate_cpel" model="spo.cuotas.info">
+            <field name="spo_Type_installment">graduate</field>
+            <field name="name">440</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester1"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_3"/>
+        </record>
+        <record id="spo_attribute_value2_graduate_cpel" model="spo.cuotas.info">
+            <field name="spo_Type_installment">graduate</field>
+            <field name="name">480</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester2"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_3"/>
+        </record>
+        <record id="spo_attribute_value3_graduate_cpel" model="spo.cuotas.info">
+            <field name="spo_Type_installment">graduate</field>
+            <field name="name">540</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester3"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_3"/>
+        </record>
+        <record id="spo_attribute_value4_graduate_cpel" model="spo.cuotas.info">
+            <field name="spo_Type_installment">graduate</field>
+            <field name="name">600</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester4"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_3"/>
+        </record>
+        <record id="spo_attribute_value5_graduate_cpel" model="spo.cuotas.info">
+            <field name="spo_Type_installment">graduate</field>
+            <field name="name">650</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester5"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_3"/>
+        </record>
+        <record id="spo_attribute_value6_graduate_cpel" model="spo.cuotas.info">
+            <field name="spo_Type_installment">graduate</field>
+            <field name="name">700</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester6"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_3"/>
+        </record>
+        <record id="spo_attribute_value7_graduate_cpel" model="spo.cuotas.info">
+            <field name="spo_Type_installment">graduate</field>
+            <field name="name">700</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester7"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_3"/>
+        </record>
+        <record id="spo_attribute_value8_graduate_cpel" model="spo.cuotas.info">
+            <field name="spo_Type_installment">graduate</field>
+            <field name="name">700</field>
+            <field name="spo_miss_semester" ref="sponsor_educative_credit.spo_miss_semester8"/>
+            <field name="spo_academic_program_id" ref="sponsor_educative_credit.spo_academic_program_3"/>
+        </record>
+        <record id="spo_product_cuota" model="product.template">
+            <field name="name">Servicio de Cuota</field>
+            <field name="sale_ok">True</field>
+            <field name="purchase_ok">False</field>
+            <field name="detailed_type">service</field>
+            <field name="list_price">0.0</field>
+            <!-- <field name="attribute_line_ids" eval="[(0, 0, {'spo_Type_installment': ref('sponsor_educative_credit.spo_attribute_student_pr'),'value_ids': [(6,0,[ref('sponsor_educative_credit.spo_attribute_value1_student_pr'),
+                                                                                                                                                            ref('sponsor_educative_credit.spo_attribute_value2_student_pr'),
+                                                                                                                                                            ref('sponsor_educative_credit.spo_attribute_value3_student_pr'),
+                                                                                                                                                            ref('sponsor_educative_credit.spo_attribute_value4_student_pr'),
+                                                                                                                                                            ref('sponsor_educative_credit.spo_attribute_value5_student_pr'),
+                                                                                                                                                            ref('sponsor_educative_credit.spo_attribute_value6_student_pr'),
+                                                                                                                                                            ref('sponsor_educative_credit.spo_attribute_value7_student_pr'),
+                                                                                                                                                            ref('sponsor_educative_credit.spo_attribute_value8_student_pr'),
+                                                                                                                                                            ref('sponsor_educative_credit.spo_attribute_value9_student_pr'),
+                                                                                                                                                            ref('sponsor_educative_credit.spo_attribute_value10_student_pr'),])]})]"/>
+            <field name="spo_academic_program_id">1</field> -->
+        </record>
+        
+
+
+    </data> 
+    
+    
+
+</odoo>

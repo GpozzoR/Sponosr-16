@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <!-- sale.order.line form view -->
+        <record id="spo_sale_order_line_custom_cuota_view_form" model="ir.ui.view">
+            <field name="name">spo.sale.order.line.custom.cuota.view.form</field>
+            <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <widget name="web_ribbon" title="Pagado" attrs="{'invisible': [('payment_state', '!=', 'paid')]}"/>
+                        <div name="button_box" class="oe_button_box">
+                            <button  name="open_payments" type="object" class="oe_stat_button" icon="fa-solid fa-money-bill">
+                                <div class="o_stat_info">
+                                    <!-- <field name="spo_payments" class="o_stat_value" readonly="1"/> -->
+                                    <span class="o_stat_text">Recibo</span>
+                                </div>
+                            </button>
+                            <button  name="open_invoices" type="object" class="oe_stat_button" icon="fa-solid fa-receipt">
+                                <div class="o_stat_info">
+                                    <!-- <field name="spo_payments" class="o_stat_value" readonly="1"/> -->
+                                    <span class="o_stat_text">Factura</span>
+                                </div>
+                            </button>
+                            <button  name="open_diario" type="object" class="oe_stat_button" icon="fa-solid fa-receipt">
+                                <div class="o_stat_info">
+                                    <!-- <field name="spo_payments" class="o_stat_value" readonly="1"/> -->
+                                    <span class="o_stat_text">Asiento de Diario</span>
+                                </div>
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+                                <label string="Cuota" for="spo_nro_cuota_ident"/>
+                                <div class="o_row">
+                                    <field name="spo_nro_cuota_ident" class="border-bottom" attrs="{'readonly':[('payment_state','=','paid')]}"/>
+                                    <field name="spo_type_cuota" string="Tipo de Cuota" class="border-bottom" attrs="{'readonly':[('payment_state','=','paid')]}"/>
+                                </div>
+                                <field name="spo_emision_date" string="Fecha de Emision" class="border-bottom" attrs="{'readonly':[('payment_state','=','paid')]}"/>
+                                <field name="spo_final_date" string="Fecha de Vencimiento" class="border-bottom" attrs="{'readonly':[('payment_state','=','paid')]}"/>
+                                <field name="spo_desembolso" string="Desembolso" class="border-bottom" attrs="{'readonly':[('payment_state','=','paid')]}"/>
+                                <field name="spo_capital" string="Capital" class="border-bottom" attrs="{'readonly':[('payment_state','=','paid')]}"/>
+                                <!-- <field name="name" string="Cuota" class="border-bottom" attrs="{'readonly':[('payment_state','=','paid')]}"/> -->
+                            </group>
+                            <group>
+                                <field name="spo_amortizacion"  string="Amortizacion de Capital" class="border-bottom" attrs="{'readonly':[('payment_state','=','paid')]}"/>
+                                <field name="spo_interes" string="Interes" class="border-bottom" attrs="{'readonly':[('payment_state','=','paid')]}"/>
+                                <field name="spo_desgravamen" string="Desgravamen" class="border-bottom" attrs="{'readonly':[('payment_state','=','paid')]}"/>
+                                <field name="spo_costo_gestion" string="Costo de Gestíon" class="border-bottom" attrs="{'readonly':[('payment_state','=','paid')]}"/>
+                                <field name="cuota_total" string="Cuota Total" class="border-bottom" attrs="{'readonly':[('payment_state','=','paid')]}"/>
+                            </group>
+                            <group>
+                                <field name="payment_state"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Pagos">
+                                <group>
+                                    <group>
+                                        <label string="Importe" for="spo_import"/>
+                                        <div class="o_row">
+                                            <field name="spo_import" class="border-bottom"/>
+                                            <field name="spo_currency" class="border-bottom"/>
+                                        </div>
+                                        <field name="spo_paid_date" class="border-bottom" placeholder="dd/mm/aaaa"/>
+                                        <field name="spo_memo" class="border-bottom"/>
+                                    </group>
+                                    <group>
+                                        <field name="spo_diary" class="border-bottom"/>
+                                        <field name="spo_bancary_account" class="border-bottom"/>
+                                        <field name="spo_cuota_related" class="border-bottom"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="spo_account_payment_cuota_view_form_inherit" model="ir.ui.view">
+            <field name="name">spo.account.payment.cuota.view.form.inherit</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_bank_id'][3]" position="after">
+                    <field name="spo_cuota_id" can_create="0" can_write="0" readonly="True" context="{'form_view_ref':'sponsor_educative_credit.spo_sale_order_line_custom_cuota_view_form'}" />
+                </xpath>
+            </field>
+        </record>
+    
+    </data>
+    
+
+</odoo>

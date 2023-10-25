@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="spo_quick_create_opportunity_form" model="ir.ui.view">
+            <field name="name">spo.state.interview.quick.create.opportunity.form</field>
+            <field name="model">crm.lead</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="partner_id" widget="res_partner_many2one"
+                            string='Alumnos / Postulantes'
+                            context="{
+                            'res_partner_search_mode': type == 'opportunity' and 'customer' or False,
+                            'default_name': contact_name or partner_name,
+                            'default_is_company': type == 'opportunity' and contact_name == False,
+                            'default_company_name': type == 'opportunity' and partner_name,
+                            'default_phone': phone,
+                            'default_email': email_from,
+                            'default_city': city,
+                            'default_state_id': state_id,
+                            'default_country_id': country_id,
+                            'default_l10n_pe_district': l10n_pe_district,
+                            'default_user_id': user_id,
+                            'default_team_id': team_id}"
+                            options="{'no_quick_create':True}"/>
+                        <field name="name" placeholder="Por ejemplo, oportunidad de ..." />
+                        <field name="email_from" string="Correo" />
+                        <field name="phone" string="Teléfono" />
+                        <field name="company_currency" invisible="1"/>
+                        <field name="company_id" invisible="1"/>
+                        <field name="user_id" invisible="1"/>
+                        <field name="user_company_ids" invisible="1"/>
+                        <field name="team_id" invisible="1"/>
+                        <field name="type" invisible="1"/>
+                        <field name="partner_name" invisible="1"/>
+                        <field name="contact_name" invisible="1"/>
+                        <field name="country_id" invisible="1"/>
+                        <field name="state_id" invisible="1"/>
+                        <field name="city" invisible="1"/>
+                        <field name="street" invisible="1"/>
+                        <field name="street2" invisible="1"/>
+                        <field name="zip" invisible="1"/>
+                        <field name="mobile" invisible="1"/>
+                        <field name="website" invisible="1"/>
+                        <field name="function" invisible="1"/>
+                        <field name="title" invisible="1"/>
+                        <field name="activity_ids" invisible="1"/>
+                        <field name="l10n_pe_district" invisible="1"/>
+                    </group>
+                </form>
+            </field>
+    </record>
+
+    <record id="spo_kanban_view_leads" model="ir.ui.view">
+            <field name="name">spo.state.interview.kanban.view.leads</field>
+            <field name="model">crm.lead</field>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <kanban default_group_by="stage_id" class="o_kanban_small_column o_opportunity_kanban" on_create="quick_create" quick_create_view="sponsor_educative_credit.spo_quick_create_opportunity_form" archivable="false" sample="1" js_class="crm_kanban">
+                    <field name="stage_id" options="{&quot;group_by_tooltip&quot;: {&quot;requirements&quot;: &quot;Description&quot;}}" on_change="1"/>
+                    <field name="probability"/>
+                    <field name="color"/>
+                    <field name="priority"/>
+                    <field name="expected_revenue"/>
+                    <field name="kanban_state" modifiers="{&quot;readonly&quot;: true}"/>
+                    <field name="activity_date_deadline" on_change="1" modifiers="{&quot;readonly&quot;: true}"/>
+                    <field name="user_id" on_change="1"/>
+                    <field name="partner_id" on_change="1"/>
+                    <field name="activity_summary"/>
+                    <field name="active"/>
+                    <field name="company_currency" modifiers="{&quot;readonly&quot;: true}"/>
+                    <field name="activity_state" modifiers="{&quot;readonly&quot;: true}"/>
+                    <field name="activity_ids" on_change="1"/>
+                    <field name="recurring_revenue_monthly" modifiers="{&quot;readonly&quot;: true}"/>
+                    <!-- <progressbar field="activity_state" colors="{&quot;planned&quot;: &quot;success&quot;, &quot;today&quot;: &quot;warning&quot;, &quot;overdue&quot;: &quot;danger&quot;}" sum_field="expected_revenue" recurring_revenue_sum_field="recurring_revenue_monthly" help="Esta barra permite filtrar las oportunidades basado en las actividades agendadas."/> -->
+                    <templates>
+                        <t t-name="kanban-box">
+                            <t t-set="lost_ribbon" t-value="!record.active.raw_value and record.probability and record.probability.raw_value == 0"/>
+                            <div t-attf-class="#{!selection_mode ? kanban_color(record.color.raw_value) : ''} #{lost_ribbon ? 'oe_kanban_card_ribbon' : ''} oe_kanban_global_click oe_kanban_card d-flex flex-column">
+                                <div class="ribbon ribbon-top-right" modifiers="{&quot;invisible&quot;: [&quot;|&quot;, [&quot;probability&quot;, &quot;&gt;&quot;, 0], [&quot;active&quot;, &quot;=&quot;, true]]}">
+                                    <span class="bg-danger">Pérdidos</span>
+                                </div>
+
+                                <div class="o_dropdown_kanban dropdown">
+                                    <a class="dropdown-toggle o-no-caret btn" role="button" data-bs-toggle="dropdown" data-bs-display="static" href="#" aria-label="Menú desplegable" title="Menú desplegable">
+                                        <span class="fa fa-ellipsis-v"/>
+                                    </a>
+                                    <div class="dropdown-menu" role="menu">
+                                        <t t-if="widget.editable"><a role="menuitem" type="edit" class="dropdown-item">Editar</a></t>
+                                        <t t-if="widget.deletable"><a role="menuitem" type="delete" class="dropdown-item">Eliminar</a></t>
+                                        <ul class="oe_kanban_colorpicker" data-field="color"/>
+                                    </div>
+                                </div>
+                                <div class="oe_kanban_content flex-grow-1">
+                                    <div class="o_kanban_record_title oe_kanban_details">
+                                        <strong><field name="name" modifiers="{&quot;required&quot;: true}"/></strong>
+                                    </div>
+                                    <div class="o_kanban_record_subtitle">
+                                        <t t-if="record.expected_revenue.raw_value">
+                                            <field name="expected_revenue" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+                                            </t>
+                                        <t t-if="record.recurring_revenue and record.recurring_revenue.raw_value">
+                                            </t>
+                                    </div>
+                                    <div>
+                                        <span class="o_text_overflow" t-if="record.partner_id.value" t-esc="record.partner_id.value"/>
+                                    </div>
+                                    <div>
+                                        <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                                    </div>
+                                </div>
+                                <div class="oe_kanban_footer">
+                                    <div class="o_kanban_record_bottom">
+                                        <div class="oe_kanban_bottom_left">
+                                            <field name="priority" widget="priority"/>
+                                            <field name="activity_ids" widget="kanban_activity" on_change="1"/>
+                                        </div>
+                                        <div class="oe_kanban_bottom_right">
+                                            <field name="user_id" widget="many2one_avatar_user" on_change="1"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"/>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+    </record>
+    
+    <record id="spo_view_form" model="ir.ui.view">
+        <field name="name">spo.state.interview.view.form</field>
+        <field name="model">crm.lead</field>
+        <field name="arch" type="xml">
+            <form class="o_lead_opportunity_form" js_class="crm_form">
+                        <header>
+                            <button name="action_set_won_rainbowman" string="Ganado"
+                                type="object" class="oe_highlight" data-hotkey="w" title="Mark as won"
+                                attrs="{'invisible': ['|','|', ('active','=',False), ('probability', '=', 100), ('type', '=', 'lead')]}"/>
+                            <button name="%(crm.crm_lead_lost_action)d" string="Perdido" data-hotkey="l" title="Mark as lost"
+                                type="action" context="{'default_lead_id': active_id}" attrs="{'invisible': ['|', ('type', '=', 'lead'), '&amp;',('active', '=', False),('probability', '&lt;', 100)]}"/>
+                            <button name="%(crm.action_crm_lead2opportunity_partner)d" string="Convertir a Oportunidad" type="action" help="Convert to Opportunity"
+                                class="oe_highlight" attrs="{'invisible': ['|', ('type', '=', 'opportunity'), ('active', '=', False)]}" data-hotkey="v"/>
+                            <button name="toggle_active" string="Restaurar" type="object" data-hotkey="z"
+                                attrs="{'invisible': ['|', ('probability', '&gt;', 0), ('active', '=', True)]}"/>
+                            <button name="action_set_lost" string="Perdido" type="object" data-hotkey="l" title="Mark as lost"
+                                attrs="{'invisible': ['|', ('type', '=', 'opportunity'), '&amp;', ('probability', '=', 0), ('active', '=', False)]}"/>
+                            <field name="stage_id" widget="statusbar" class="o_field_statusbar"
+                                options="{'clickable': '1', 'fold_field': 'fold'}"
+                                domain="['|', ('team_id', '=', team_id), ('team_id', '=', False)]"
+                                attrs="{'invisible': ['|', ('active', '=', False), ('type', '=', 'lead')]}"/>
+                        </header>
+                        <field name="probability" invisible="1"/>
+                        <field name="type" invisible="1"/>
+                        <field name="partner_name" invisible="1"/>
+                        <field name="contact_name" invisible="1"/>
+                        <field name="team_id" invisible="1"/>
+                    <sheet>
+                        <field name="active" invisible="1"/>
+                        <field name="company_id" invisible="1"/>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_schedule_meeting" type="object" class="oe_stat_button" icon="fa-calendar" context="{'partner_id': partner_id}" attrs="{'invisible': [('type', '=', 'lead')]}">
+                                <div class="o_stat_info">
+                                    <field name="calendar_event_count" class="o_stat_value"/>
+                                    <span class="o_stat_text" attrs="{'invisible': [('calendar_event_count', '&lt;', 2)]}">Reuniones</span>
+                                    <span class="o_stat_text" attrs="{'invisible': [('calendar_event_count', '&gt;', 1)]}">Reunion</span>
+                                </div>
+                            </button>
+                            <button name="action_show_potential_duplicates" type="object" class="oe_stat_button" icon="fa-star" attrs="{'invisible': [('duplicate_lead_count', '&lt;', 1)]}">
+                                <div class="o_stat_info">
+                                    <field name="duplicate_lead_count" class="o_stat_value"/>
+                                    <span class="o_stat_text" attrs="{'invisible': [('duplicate_lead_count', '&lt;', 2)]}">Oportunidades Similares</span>
+                                    <span class="o_stat_text" attrs="{'invisible': [('duplicate_lead_count', '&gt;', 1)]}">Oportunidad Similar</span>
+                                </div>
+                            </button>
+                        </div>
+                        <widget name="web_ribbon" title="Perdido" bg_color="bg-danger" attrs="{'invisible': ['|', ('probability', '&gt;', 0), ('active', '=', True)]}"/>
+                        <widget name="web_ribbon" title="Ganado" attrs="{'invisible': [('probability', '&lt;', 100)]}"/>
+                        <div class="oe_title">
+                            <h1><field name="name"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="partner_id" widget="res_partner_many2one" string="Postulante"/>
+                                <field name="category_id" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" placeholder="e.g. &quot;B2B&quot;, &quot;VIP&quot;, &quot;Consulting&quot;, ..." can_create="true" can_write="true"/>
+                                <label for="phone" class="oe_inline"/>
+                                <div class="o_row o_row_readonly" style="width:70%%; padding:5px;">
+                                    <field name="phone" widget="phone"/>
+                                </div>
+                                <label for="email_from" class="oe_inline"/>
+                                <div class="o_row o_row_readonly" style="width:70%%; padding:5px;">
+                                    <field name="email_from" string="Email" widget="email"/>
+                                </div>
+                                <field name="user_company_ids" invisible='1'/>
+                                <field name="user_id" widget="many2one_avatar_user"/>
+                            </group>
+                            <group name="opportunity_partner">
+                                <label for="street" string="Dirección"/>
+                                <div class="o_address_format">
+                                    <field name="street" placeholder="Calle..." class="o_address_street" />
+                                    <field name="street2" placeholder="Calle 2..." class="o_address_street" />
+                                    <field name="l10n_pe_district" placeholder="Distrito..." class="o_address_street" />
+                                    <field name="city" placeholder="Ciudad" class="o_address_city" />
+                                    <field name="state_id" class="o_address_state" placeholder="Estado"  options="{&quot;no_open&quot;: True}" />
+                                    <field name="zip" placeholder="ZIP" class="o_address_zip" />
+                                    <div name="partner_address_country" class="d-flex justify-content-between">
+                                        <field name="country_id" placeholder="País" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                                    </div>
+                                </div>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page>
+                                <group>
+                                    <group string="Estados">
+                                        <field name="spo_evaluation_state"/>
+                                        <field name="spo_socioeconomic_evaluation_state"/>
+                                        <label for="spo_personal_interview_date" string="Entrevista Personal"/>
+                                        <div class="o_row">
+                                            <field name="spo_state_1_id" widget="selection"  class="border-bottom" />
+                                            <field name="spo_personal_interview_date" class="border-bottom" placeholder="dd/mm/aaaa"/>
+                                        </div>
+                                        <label for="spo_delivery_date_aditional_document" string="Documentos Adicionales"/>
+                                        <div class="o_row">
+                                            <field name="spo_state_2_id" widget="selection"  class="border-bottom" />
+                                            <field name="spo_delivery_date_aditional_document" class="border-bottom" placeholder="dd/mm/aaaa"/>
+                                        </div>
+                                        <field name="spo_state_3_id" widget="selection"  class="border-bottom" />
+                                    </group>
+                                    <group string="Resultados">
+                                        <field name="spo_state_4_id" widget="selection"  class="border-bottom" />
+                                        <field name="spo_risk_motive_aptos_1_ids"  class="border-bottom" />                
+                                        <field name="spo_risk_motive_aptos_2_ids"  class="border-bottom" />                
+                                        <field name="spo_risk_motive_aptos_3_ids"  class="border-bottom" />
+                                        <span></span>
+                                        <div class="o_row">
+                                            <field name="spo_shipment_date_risks_evaluation" class="border-bottom" placeholder="dd/mm/aaaa"/>
+                                            <label for="spo_shipment_date_risks_evaluation" string="Envío a CDR"/>
+                                        </div>
+                                        <span></span>
+                                        <div class="o_row">
+                                            <field name="spo_result_date_risks_evaluation" class="border-bottom" placeholder="dd/mm/aaaa"/>
+                                            <label for="spo_result_date_risks_evaluation" string="Resultados CDR"/>
+                                        </div>
+                                        <field name="spo_state_5_id" widget="selection"  class="border-bottom" />
+                                        <separator string="    "/>
+                                        <field name="spo_state_6_id" widget="selection"  class="border-bottom" />
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                    </div>
+                </form>
+        </field>
+    </record>
+
+    <record id="spo_case_form_view_oppor" model="ir.ui.view">
+            <field name="name">spo.lead.oppor.inherited.crm</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="sponsor_educative_credit.spo_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_set_won_rainbowman']" position="before">
+                    <button string="Nuevo Cronograma / Corrida" name="action_sale_quotations_new" type="object" class="oe_highlight" data-hotkey="q"
+                        title="Create new quotation"
+                        attrs="{'invisible': ['|', ('type', '=', 'lead'), '&amp;', ('probability', '=', 0), ('active', '=', False)]}"/>
+                </xpath>
+                <button name="action_set_won_rainbowman" position="attributes">
+                    <attribute name="class" remove="oe_highlight"/>
+                </button>
+                <button name="action_schedule_meeting" position="after">
+                    <button class="oe_stat_button" type="object"
+                        name="action_view_sale_quotation" icon="fa-pencil-square-o" attrs="{'invisible': [('type', '=', 'lead')]}">
+                        <field name="quotation_count" widget="statinfo" string="Cronogramas / Corridas"/>
+                    </button>
+                    <button class="oe_stat_button" type="object" attrs="{'invisible': ['|', ('sale_order_count', '=', 0), ('type', '=', 'lead')]}"
+                        name="action_view_sale_order" icon="fa-usd">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_value"><field name="sale_amount_total" widget="monetary" options="{'currency_field': 'company_currency'}"/></span>
+                            <span class="o_stat_text">Ordenes</span>
+                            <field name="sale_order_count" invisible="1"/>
+                        </div>
+                    </button>
+                </button>
+            </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="spo_crm_lead_action">
+        <field name="name">Estado de Entrevista Personal</field>
+        <field name="res_model">crm.lead</field>
+        <field name="view_mode">kanban,tree,graph,pivot,form,calendar,activity</field>
+        <field name="domain">[('type','=','opportunity')]</field>
+        <field name="context">{
+                    'default_type': 'opportunity',
+                    'search_default_assigned_to_me': 1
+            }</field>
+        <field name="search_view_id" ref="crm.view_crm_case_opportunities_filter"/>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('spo_view_form')}),
+            (0, 0, {'view_mode': 'activity', 'view_id': ref('crm.crm_lead_view_activity')}),
+            ]"/>
+        <field name="view_id" ref="spo_kanban_view_leads"/>
+    </record>
+
+    <record id="spo_crm_lead_action_view_kanban" model="ir.actions.act_window.view">
+            <field name="sequence" eval="0"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="spo_kanban_view_leads"/>
+            <field name="act_window_id" ref="spo_crm_lead_action"/>
+        </record>
+
+        <record id="spo_crm_lead_action_view_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="crm.crm_case_tree_view_oppor"/>
+            <field name="act_window_id" ref="spo_crm_lead_action"/>
+        </record>
+
+        <record id="spo_crm_lead_action_view_calendar" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">calendar</field>
+            <field name="view_id" ref="crm.crm_case_calendar_view_leads"/>
+            <field name="act_window_id" ref="spo_crm_lead_action"/>
+        </record>
+
+        <record id="spo_crm_lead_action_view_pivot" model="ir.actions.act_window.view">
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">pivot</field>
+            <field name="view_id" ref="crm.crm_lead_view_pivot"/>
+            <field name="act_window_id" ref="spo_crm_lead_action"/>
+        </record>
+
+        <record id="spo_crm_lead_action_view_graph" model="ir.actions.act_window.view">
+            <field name="sequence" eval="5"/>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="crm.crm_lead_view_graph"/>
+            <field name="act_window_id" ref="spo_crm_lead_action"/>
+        </record>
+    
+</odoo>

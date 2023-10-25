@@ -1,0 +1,83 @@
+
+$o-brand-odoo: #06BCC1;
+$o-brand-primary: #5D8DA8;
+
+
+.o_main_navbar {
+    --o-navbar-height: 46px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    height: var(--o-navbar-height);
+    min-width: min-content;
+    border-bottom: 0;
+    background: linear-gradient(45deg, #06BCC1, #12263A);
+}
+
+.o_field_statusbar > .o_statusbar_status > .o_arrow_button.o_arrow_button_current.disabled:after, .o_field_statusbar > .o_statusbar_status > .o_arrow_button.o_arrow_button_current.disabled:before {
+    border-left-color: #06BCC1;
+}
+
+.o_field_statusbar > .o_statusbar_status > .o_arrow_button.o_arrow_button_current.disabled {
+    background-color: #06BCC1;
+    color: #FFF;
+}
+
+.o_home_menu_background, .o_web_client.o_home_menu_background {
+    background-size: cover;
+    background-attachment: fixed;
+    background-color: #021923;
+    //background-image: var(--homeMenu-bg-image, radial-gradient(at 100% 0%, rgba(59, 44, 63, 0.6) 0px, transparent 50%), radial-gradient(at 7% 13%, rgba(119, 114, 126, 0.42) 0px, transparent 50%), radial-gradient(at 96% 94%, rgba(117, 111, 123, 0.51) 0px, transparent 50%), radial-gradient(at 3% 96%, rgba(59, 44, 63, 0.41) 0px, transparent 50%), url(/sudeaseg_base/static/img/dashboard-sudeaseg.svg));
+    // background-image: url(/sudeaseg_base/static/img/dashboard-sudeaseg.svg);
+}
+
+.o_home_menu_background:not(.o_home_menu_background_custom) .o_main_navbar {
+    background-color: $o-brand-odoo;
+    border-color: $o-brand-odoo;
+}
+
+
+.o_form_view .o_form_statusbar > .o_statusbar_status > .o_arrow_button.btn-primary.disabled {
+    background-color: $o-brand-odoo;
+    color: #fff;
+}
+
+.o_searchview .o_searchview_facet .o_searchview_facet_label {
+    background-color: $o-brand-odoo;
+}
+
+.o_ChatWindowHeader {
+    background-color: $o-brand-odoo;
+    color: #fff;
+}
+
+
+.btn-fill-primary, .btn-primary {
+    color: #FFF;
+    background-color: #C5D8D1;
+    border-color: #C5D8D1;
+    box-shadow: 0;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #021923;
+    border-color: #021923;
+
+    box-shadow: 0;
+  }
+
+.btn-secondary {
+    background-color: #FFF;
+    border-color: #FFF;
+    box-shadow: 0;
+    color: #12263A;
+}
+
+.btn-secondary:hover {
+    color: #fff;
+    background-color: #06BCC1;
+    border-color: #06BCC1;
+    box-shadow: 0;
+  }
+

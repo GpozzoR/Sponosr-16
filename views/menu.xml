@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>    
+        <menuitem id="sponsor_main_menu" name="Crédito Educativo" web_icon="sponsor_educative_credit,static/description/icon.png"/>
+            
+        <!-- ###Menu beneficent -->
+        <menuitem
+            id="spo_beneficent_menu"
+            name="Contactos"
+            parent="sponsor_main_menu"
+            action="spon_res_partner_action"
+            sequence="10"/>
+        <!-- Credit Oportunities -->
+        <menuitem
+            id="spo_credit_oportunities_menu"
+            name="Oportunidades de Crédito"
+            action="spo_crm_lead_action"
+            parent="sponsor_main_menu"
+            sequence="20"/>
+        
+        <!-- Contracts-->
+        <menuitem
+            id="spo_sale_order_menu"
+            name="Cronogramas / Corridas"
+            action="spo_contract_action"
+            parent="sponsor_main_menu"
+            sequence="30"/>
+
+        <menuitem
+            id="spo_accout_payment_menu"
+            name="Registros de Pago"
+            action="account.action_account_payments"
+            parent="sponsor_main_menu"
+            sequence="40"/>
+
+        <!-- ###Menu settings -->
+        <menuitem
+            id="spo_settings_menu"
+            name="Configuración"
+            parent="sponsor_main_menu"
+            sequence="100"/>
+        
+            <menuitem 
+                id="spo_conf_sub_menu_settings" 
+                name="Ajustes" 
+                parent="spo_settings_menu"
+                action="action_sponsor_config" 
+                sequence="10"/>
+            
+            <menuitem id="spo_settings_title"
+                    sequence="10"
+                    parent="spo_settings_menu"
+                    name="Educacional"/>
+
+                <menuitem
+                    id="spo_universities_sub_menu_settings"
+                    name="Universidades"
+                    action="Universidades_action"
+                    parent="spo_settings_title"
+                    sequence="10"/>
+                <menuitem
+                    id="spo_academic_program_sub_menu_settings"
+                    name="Programas Académicos"
+                    action="Programas_Academicos_action"
+                    parent="spo_settings_title"
+                    sequence="20"/>
+                <menuitem
+                    id="spo_career_sub_menu_settings"
+                    name="Carreras"
+                    action="Carreras_action"
+                    parent="spo_settings_title"
+                    sequence="30"/>
+                    
+            
+            <menuitem
+                id="spo_beneficent_sub_menu_settings"
+                name="Tipos de Cliente"
+                action="Beneficiarios_action"
+                parent="spo_settings_menu"
+                sequence="20"/>
+
+            <menuitem
+                id="spo_risk_motive_sub_menu_settings"
+                name="Motivos de Riesgo"
+                action="Motivos_action"
+                parent="spo_settings_menu"
+                sequence="30"/>
+
+            <menuitem
+                id="spo_cuota_value_sub_menu_settings"
+                name="Valores de Cuota"
+                action="valores_cuotas_action"
+                parent="spo_settings_menu"
+                sequence="40"/>
+                    
+            <menuitem
+                id="spo_rate_sub_menu_settings"
+                name="Monedas y Tasas"
+                action="base.action_currency_form"
+                parent="spo_settings_menu"
+                sequence="50"/>
+
+                <!-- <menuitem
+                    id="spo_allows_edit_create_sub_menu_settings"
+                    name="Permisos de Crear y Editar Cuotas"
+                    action="Permisos_create_edit_action"
+                    parent="spo_settings_title2"
+                    sequence="40"/>-->
+
+            
+                <!-- <menuitem
+                        id="spo_state_interview_sub_menu_settings"
+                        name="Etapas de Est. de Entrevista Personal"
+                        action="Etapas1_action"
+                        parent="spo_settings_title2"
+                        sequence="10"/>
+                <menuitem
+                        id="spo_state_leave_sub_menu_settings"
+                        name="Etapas de Est. de Entrega de Documentos Adicionales"
+                        action="Etapas2_action"
+                        parent="spo_settings_title2"
+                        sequence="20"/>
+                <menuitem
+                        id="spo_state_evaluation_sub_menu_settings"
+                        name="Etapas de Est. de Evaluación Aptitudinal"
+                        action="Etapas3_action"
+                        parent="spo_settings_title2"
+                        sequence="30"/>
+                <menuitem
+                        id="spo_result_preliminar_sub_menu_settings"
+                        name="Etapas de Reslt. Preliminar del Postulante"
+                        action="Etapas4_action"
+                        parent="spo_settings_title2"
+                        sequence="40"/>
+                <menuitem
+                        id="spo_result_postulate_sub_menu_settings"
+                        name="Etapas de Reslt. del Postulante Luego del Comité"
+                        action="Etapas5_action"
+                        parent="spo_settings_title2"
+                        sequence="50"/>
+                <menuitem
+                        id="spo_result_final_sub_menu_settings"
+                        name="Etapas de Reslt. Final de la Evaluación"
+                        action="Etapas6_action"
+                        parent="spo_settings_title2"
+                        sequence="60"/> -->
+    </data>
+    
+
+</odoo>
